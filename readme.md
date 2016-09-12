@@ -46,6 +46,8 @@ GET /videos
 ```
 ###**Parameters**
 * type(_Required_|integer)-视频类别
+* like(_Optional_|integer)-最热视频
+* page(_Optional_|integer)-分页
 
 |type码|状态|
 | --------------  | :---: |
