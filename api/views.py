@@ -13,7 +13,7 @@ from core.models import Video, AvatarTrack
 
 class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
     model = Video
-    paginate_by = 10
+    paginate_by = 1
     http_method_names = ['get', 'post']
 
     def get_queryset(self):
