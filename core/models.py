@@ -14,7 +14,7 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class Video(models.Model):
+class Video(BaseModel):
     cls_choices = [
         (1, 'movie'),
         (2, 'mv'),
@@ -24,7 +24,8 @@ class Video(models.Model):
     title = models.CharField(max_length=128)
     author = models.CharField(max_length=128, null=True, blank=True)
     reference = models.CharField(max_length=128, null=True, blank=True)
-    url = models.CharField(max_length=128)
+    thumb_nail = models.CharField(max_length=256, default='')
+    url = models.CharField(max_length=128, unique=True)
     classification = models.IntegerField(choices=cls_choices, default=1)
     like = models.IntegerField(default=0)
 
@@ -38,3 +39,11 @@ class AvatarTrack(BaseModel):
 
     def __unicode__(self):
         return self.video.title
+
+
+class Secret(BaseModel):
+    secret = models.CharField(max_length=64, unique=True)
+    remark = models.CharField(max_length=20, default='web')
+
+    def __unicode__(self):
+        return self.remark

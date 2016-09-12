@@ -6,6 +6,7 @@ urlpatterns = patterns('',
                        # url(r'^$', 'Dionysus.views.home', name='home'),
                        # url(r'^blog/', include('blog.urls')),
 
-                       url(r'^admin/', include(admin.site.urls)),
+                       url(r'^site_admin/', include(admin.site.urls)),
+                       url(r'^admin/', include('myadmin.urls')),
                        url(r'^api/v1/', include('api.urls')),
                        )

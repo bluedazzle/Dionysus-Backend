@@ -10,7 +10,6 @@ from django.utils.timezone import get_current_timezone
 from django.http import HttpResponseRedirect
 from core.Mixin.StatusWrapMixin import ERROR_PERMISSION_DENIED, ERROR_TOKEN, INFO_EXPIRE
 from core.models import Secret
-from core.models import PartyUser
 from myadmin.models import HAdmin
 
 
@@ -37,15 +36,16 @@ class CheckSecurityMixin(object):
         timestamp = self.request.GET.get('timestamp', '')
         sign = unicode(self.request.GET.get('sign', '')).upper()
         check = unicode(hashlib.md5('{0}{1}'.format(timestamp, self.secret)).hexdigest()).upper()
+        # print check
         if check == sign:
             return True
         return False
 
     def wrap_check_sign_result(self):
-        if not self.check_expire():
-            self.message = 'sign 已过期'
-            self.status_code = ERROR_PERMISSION_DENIED
-            return False
+        # if not self.check_expire():
+        #     self.message = 'sign 已过期'
+        #     self.status_code = ERROR_PERMISSION_DENIED
+        #     return False
         self.get_current_secret()
         result = self.check_sign()
         if not result:
@@ -85,7 +85,7 @@ class CheckTokenMixin(object):
 
     def check_token(self):
         self.get_current_token()
-        user_list = PartyUser.objects.filter(token=self.token)
+        # user_list = PartyUser.objects.filter(token=self.token)
         if user_list.exists():
             self.user = user_list[0]
             return True
