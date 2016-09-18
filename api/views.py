@@ -26,6 +26,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
             queryset = queryset.filter(classification=cls)
         return queryset
 
+
     def post(self, request, *args, **kwargs):
         cls_choices = {'电影': 1, 'mv': 2, '搞笑': 3}
         json_data = json.loads(request.body)
