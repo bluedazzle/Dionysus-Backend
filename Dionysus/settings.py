@@ -58,8 +58,6 @@ ROOT_URLCONF = 'Dionysus.urls'
 WSGI_APPLICATION = 'Dionysus.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
-
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
@@ -93,5 +91,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = './static/'
+
+STATIC_MEDIA = './static/'
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)

@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 
 import json
 
-from django.views.generic import ListView, DetailView
+from django.db.models import Q
+from django.views.generic import ListView, DetailView, DeleteView
 
 from core.Mixin.CheckMixin import CheckSecurityMixin
 from core.Mixin.StatusWrapMixin import *
@@ -13,19 +14,23 @@ from core.models import Video, AvatarTrack
 
 class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
     model = Video
-    paginate_by = 1
+    paginate_by = 20
     http_method_names = ['get', 'post']
 
     def get_queryset(self):
         queryset = super(VideoListView, self).get_queryset()
         cls = self.request.GET.get('type', 1)
+        all = self.request.GET.get('all', None)
+        search = self.request.GET.get('search', None)
+        if search:
+            queryset = queryset.filter(title__icontains=search)
         popular = self.request.GET.get('popular', None)
         if popular:
             queryset = queryset.order_by('like')
         else:
-            queryset = queryset.filter(classification=cls)
+            if not all:
+                queryset = queryset.filter(classification=cls)
         return queryset
-
 
     def post(self, request, *args, **kwargs):
         cls_choices = {'电影': 1, 'mv': 2, '搞笑': 3}
@@ -55,10 +60,11 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         return self.render_to_response({})
 
 
-class VideoDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
+class VideoDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DeleteView):
     model = Video
+    success_url = ''
     pk_url_kwarg = 'id'
-    http_method_names = ['get']
+    http_method_names = ['get', 'delete']
     exclude_attr = ['modify_time']
 
     def get_object(self, queryset=None):
@@ -69,3 +75,8 @@ class VideoDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
         else:
             setattr(obj, 'tracks', [])
         return obj
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return self.render_to_response({})
