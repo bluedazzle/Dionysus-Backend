@@ -10,6 +10,7 @@ from core.Mixin.CheckMixin import CheckSecurityMixin
 from core.Mixin.StatusWrapMixin import *
 from core.dss.Mixin import MultipleJsonResponseMixin, JsonResponseMixin
 from core.models import Video, AvatarTrack
+from core.qn import delete_file
 
 
 class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
@@ -78,5 +79,7 @@ class VideoDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
+        key = unicode(self.object.url).split('/')[-1]
+        delete_file(key)
         self.object.delete()
         return self.render_to_response({})
