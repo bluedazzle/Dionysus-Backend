@@ -15,7 +15,7 @@ from core.qn import delete_file
 
 class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
     model = Video
-    paginate_by = 20
+    paginate_by = 1
     http_method_names = ['get', 'post']
 
     def get_queryset(self):
