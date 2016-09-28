@@ -9,7 +9,7 @@ from django.views.generic import ListView, DetailView, DeleteView
 from core.Mixin.CheckMixin import CheckSecurityMixin
 from core.Mixin.StatusWrapMixin import *
 from core.dss.Mixin import MultipleJsonResponseMixin, JsonResponseMixin
-from core.models import Video, AvatarTrack
+from core.models import Video, AvatarTrack, Share, MyUser
 from core.qn import delete_file
 
 
@@ -82,4 +82,23 @@ class VideoDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
         key = unicode(self.object.url).split('/')[-1]
         delete_file(key)
         self.object.delete()
+        return self.render_to_response({})
+
+
+class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
+    model = Share
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        url = request.POST.get('url')
+        uid = request.POST.get('uid')
+        vid = request.POST.get('vid')
+
+        if url and uid and vid:
+            user, created = MyUser.objects.get_or_create(uid=uid)
+            video = Video.objects.get(id=vid)
+            Share(url=url, author=user, source=video).save()
+            return self.render_to_response({})
+        self.message = '参数缺失'
+        self.status_code = ERROR_DATA
         return self.render_to_response({})

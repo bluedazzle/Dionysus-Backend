@@ -4,3 +4,5 @@ from core.models import *
 admin.site.register(Video)
 admin.site.register(AvatarTrack)
 admin.site.register(Secret)
+admin.site.register(Share)
+admin.site.register(MyUser)

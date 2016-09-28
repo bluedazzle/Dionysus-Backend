@@ -47,3 +47,19 @@ class Secret(BaseModel):
 
     def __unicode__(self):
         return self.remark
+
+
+class MyUser(models.Model):
+    uid = models.CharField(max_length=128, unique=True)
+
+    def __unicode__(self):
+        return self.uid
+
+
+class Share(BaseModel):
+    source = models.ForeignKey(Video, related_name='video_shares', on_delete=models.SET_NULL, null=True, blank=True)
+    url = models.CharField(max_length=256)
+    author = models.ForeignKey(MyUser, related_name='my_shares')
+
+    def __unicode__(self):
+        return self.author.uid

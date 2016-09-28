@@ -147,3 +147,30 @@ GET /video/<id>
 
 ```
 
+##**分享视频**
+```
+POST /share
+```
+###**Parameters**
+* url(_Required_|string)-视频链接
+* uid(_Required_|string)-用户识别码
+* vid(_Required_|string)-被变脸视频id
+
+###**Return**
+成功
+```
+{
+  "body": {},
+  "status": 1,
+  "msg": "success"
+}
+```
+失败
+```
+{
+  "body": {},
+  "status": 4,
+  "msg": "数据缺失"
+}
+
+```
