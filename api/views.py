@@ -100,7 +100,6 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
             share = Share.objects.filter(url=url, author=user)
             if share.exists():
                 self.message = '视频已存在'
-                self.status_code = INFO_EXISTED
                 share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share[0].id)
                 return self.render_to_response({"url": share_url})
             Share(url=url, author=user, source=video).save()
