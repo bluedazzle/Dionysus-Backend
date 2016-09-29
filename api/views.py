@@ -90,7 +90,9 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
     http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
-        url = 'http://{0}'.format(request.POST.get('url'))
+        url = request.POST.get('url')
+        if 'http://' not in url:
+            url = 'http://{0}'.format(url)
         uid = request.POST.get('uid')
         vid = request.POST.get('vid')
 
