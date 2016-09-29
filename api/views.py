@@ -97,8 +97,9 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
         if url and uid and vid:
             user, created = MyUser.objects.get_or_create(uid=uid)
             video = Video.objects.get(id=vid)
-            Share(url=url, author=user, source=video).save()
-            return self.render_to_response({})
+            share = Share(url=url, author=user, source=video).save()
+            share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share.id)
+            return self.render_to_response({'url': share_url})
         self.message = '参数缺失'
         self.status_code = ERROR_DATA
         return self.render_to_response({})
