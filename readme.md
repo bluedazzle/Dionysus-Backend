@@ -174,3 +174,27 @@ POST /share
 }
 
 ```
+
+##**获取上传token**
+```
+get /upload
+```
+
+###**Return**
+成功
+```
+{
+  "body": {"uptoken": "xxx"},
+  "status": 1,
+  "msg": "success"
+}
+```
+失败
+```
+{
+  "body": {},
+  "status": 4,
+  "msg": "数据缺失"
+}
+
+```
