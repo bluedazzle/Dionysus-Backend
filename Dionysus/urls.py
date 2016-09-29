@@ -12,6 +12,7 @@ urlpatterns = patterns('',
                        url(r'^admin/api/', include('myadmin.api_urls')),
                        url(r'^admin/', include('myadmin.urls')),
                        url(r'^api/v1/', include('api.urls')),
+                       url(r'^page/', include('page.urls')),
 
                        url(r'^s/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_MEDIA}),
                        )

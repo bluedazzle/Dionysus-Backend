@@ -10,7 +10,7 @@ from core.Mixin.CheckMixin import CheckSecurityMixin
 from core.Mixin.StatusWrapMixin import *
 from core.dss.Mixin import MultipleJsonResponseMixin, JsonResponseMixin
 from core.models import Video, AvatarTrack, Share, MyUser
-from core.qn import delete_file
+from core.qn import delete_file, generate_upload_token
 
 
 class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
@@ -102,3 +102,11 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
         self.message = '参数缺失'
         self.status_code = ERROR_DATA
         return self.render_to_response({})
+
+
+class UploadView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
+    http_method_names = ['get']
+
+    def get(self, request, *args, **kwargs):
+        token = generate_upload_token()
+        return self.render_to_response({"token": token})

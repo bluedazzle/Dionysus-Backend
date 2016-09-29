@@ -12,6 +12,10 @@ def delete_file(key):
     bucket = BucketManager(q)
     bucket_name = 'flippy'
     ret, info = bucket.delete(bucket_name, key)
-    print(info)
     return True
 
+
+def generate_upload_token():
+    q = Auth(access_key, secret_key)
+    token = q.upload_token('flippy')
+    return token
