@@ -18,3 +18,15 @@ def generate_upload_token():
     q = Auth(access_key, secret_key)
     token = q.upload_token('flippy')
     return token
+
+
+# data = 'pfop?bucket=flippy&key=zhuannigewawayu.mp4.mp4&fops=avthumb%2fwmImage%2faHR0cDovL2Rpb255c3VzLmZpYmFyLmNuL3MvaW1hZ2Uvd2F0ZXIucG5n\n'
+#
+# q = Auth(access_key, secret_key)
+# tt = q.token(data)
+#
+# import requests
+#
+# res = requests.post('http://api.qiniu.com/pfop?bucket=flippy&key=zhuannigewawayu.mp4.mp4&fops=avthumb%2fwmImage%2faHR0cDovL2Rpb255c3VzLmZpYmFyLmNuL3MvaW1hZ2Uvd2F0ZXIucG5n',
+#                     headers={'Authorization': tt})
+# print res.content
