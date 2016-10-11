@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, render_to_response
 from django.views.generic import UpdateView, TemplateView, ListView, RedirectView
 
-
 from myadmin.models import HAdmin
 from core.Mixin.CheckMixin import CheckAdminPagePermissionMixin
 
@@ -30,6 +29,11 @@ class AdminIndexView(CheckAdminPagePermissionMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         return super(AdminIndexView, self).get(request, *args, **kwargs)
+
+
+class AdminShareView(CheckAdminPagePermissionMixin, TemplateView):
+    http_method_names = ['get']
+    template_name = 'admin/admin_share.html'
 
 
 class AdminLogoutView(CheckAdminPagePermissionMixin, RedirectView):

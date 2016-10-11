@@ -15,7 +15,7 @@ from core.qn import delete_file, generate_upload_token
 
 class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
     model = Video
-    paginate_by = 1
+    paginate_by = 10
     http_method_names = ['get', 'post']
 
     def get_queryset(self):
@@ -110,6 +110,26 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
             return self.render_to_response({'url': share_url})
         self.message = '参数缺失'
         self.status_code = ERROR_DATA
+        return self.render_to_response({})
+
+
+class ShareListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
+    model = Share
+    paginate_by = 10
+    http_method_names = ['get']
+    foreign = True
+
+
+class ShareDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DeleteView):
+    model = Share
+    http_method_names = ['get', 'delete']
+    pk_url_kwarg = 'id'
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        key = unicode(self.object.url).split('/')[-1]
+        delete_file(key)
+        self.object.delete()
         return self.render_to_response({})
 
 
