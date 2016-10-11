@@ -10,7 +10,7 @@ from core.Mixin.CheckMixin import CheckSecurityMixin
 from core.Mixin.StatusWrapMixin import *
 from core.dss.Mixin import MultipleJsonResponseMixin, JsonResponseMixin
 from core.models import Video, AvatarTrack, Share, MyUser
-from core.qn import delete_file, generate_upload_token
+from core.qn import delete_file, generate_upload_token, add_water_mask
 
 
 class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
@@ -104,8 +104,10 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
                 self.message = '视频已存在'
                 share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share[0].id)
                 return self.render_to_response({"url": share_url})
+            key = url.split("/")[-1]
+            pid = add_water_mask(key)
             thumb_nail = '{0}?vframe/jpg/offset/1/w/200/h/200/'.format(url)
-            Share(url=url, author=user, source=video, thumb_nail=thumb_nail).save()
+            Share(url=url, author=user, source=video, thumb_nail=thumb_nail, pid=pid).save()
             share = Share.objects.get(url=url, author=user)
             share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share.id)
             return self.render_to_response({'url': share_url})
@@ -151,5 +153,17 @@ class NotifyView(UpdateView):
         return HttpResponse('success')
 
     def post(self, request, *args, **kwargs):
-        print request.body
+        json_data = json.loads(request.body)
+        pid = json_data.get('id')
+        state = json_data.get('code')
+        if state == 0:
+            old_key = json_data.get('inputKey')
+            new_key = json_data.get('items')[0].get('key')
+            share = Share.objects.get(pid=pid)
+            url = 'http://oda176fz0.bkt.clouddn.com/{0}'.format(new_key)
+            thumb = '{0}?vframe/jpg/offset/1/w/200/h/200/'.format(url)
+            share.url = url
+            share.thumb_nail = thumb
+            share.save()
+            delete_file(old_key)
         return HttpResponse('success')
