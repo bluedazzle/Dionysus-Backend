@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import json
 
 from django.db.models import Q
-from django.views.generic import ListView, DetailView, DeleteView
+from django.views.generic import ListView, DetailView, DeleteView, View, UpdateView
 
 from core.Mixin.CheckMixin import CheckSecurityMixin
 from core.Mixin.StatusWrapMixin import *
@@ -140,3 +140,16 @@ class UploadView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailV
     def get(self, request, *args, **kwargs):
         token = generate_upload_token()
         return self.render_to_response({"token": token})
+
+
+class NotifyView(UpdateView):
+    http_method_names = ['get', 'post']
+    model = Share
+
+    def get(self, request, *args, **kwargs):
+        print request.body
+        return HttpResponse('success')
+
+    def post(self, request, *args, **kwargs):
+        print request.body
+        return HttpResponse('success')
