@@ -104,7 +104,8 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
                 self.message = '视频已存在'
                 share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share[0].id)
                 return self.render_to_response({"url": share_url})
-            Share(url=url, author=user, source=video).save()
+            thumb_nail = '{0}?vframe/jpg/offset/1/w/200/h/200/'.format(url)
+            Share(url=url, author=user, source=video, thumb_nail=thumb_nail).save()
             share = Share.objects.get(url=url, author=user)
             share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share.id)
             return self.render_to_response({'url': share_url})
