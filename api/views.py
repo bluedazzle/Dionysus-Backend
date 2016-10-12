@@ -121,6 +121,7 @@ class ShareListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
     paginate_by = 10
     http_method_names = ['get']
     foreign = True
+    ordering = '-create_time'
 
 
 class ShareDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DeleteView):
