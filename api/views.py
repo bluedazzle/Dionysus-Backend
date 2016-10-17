@@ -95,19 +95,24 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
             url = 'http://{0}'.format(url)
         uid = request.POST.get('uid')
         vid = request.POST.get('vid')
+        token = request.POST.get('token')
 
         if url and uid and vid:
             user, created = MyUser.objects.get_or_create(uid=uid)
             video = Video.objects.get(id=vid)
-            share = Share.objects.filter(url=url, author=user)
+            share = Share.objects.filter(token=token, author=user)
             if share.exists():
                 self.message = '视频已存在'
                 share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share[0].id)
                 return self.render_to_response({"url": share_url})
             key = url.split("/")[-1]
             pid = add_water_mask(key)
+            if not pid:
+                self.message = '视频不存在或出现错误'
+                self.status_code = ERROR_DATA
+                return self.render_to_response({})
             thumb_nail = '{0}?vframe/jpg/offset/1/w/200/h/200/'.format(url)
-            Share(url=url, author=user, source=video, thumb_nail=thumb_nail, pid=pid).save()
+            Share(url=url, author=user, source=video, thumb_nail=thumb_nail, pid=pid, token=token).save()
             share = Share.objects.get(url=url, author=user)
             share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share.id)
             return self.render_to_response({'url': share_url})

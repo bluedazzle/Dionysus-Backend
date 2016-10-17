@@ -62,6 +62,7 @@ class Share(BaseModel):
     url = models.CharField(max_length=256)
     thumb_nail = models.CharField(max_length=256, default='')
     author = models.ForeignKey(MyUser, related_name='my_shares')
+    token = models.CharField(max_length=64, default='')
 
     def __unicode__(self):
         return self.author.uid
