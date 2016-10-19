@@ -33,6 +33,15 @@ def format_tracks_data(data, total_frame, total_time):
                     nt['frame'] += i
                     nt['time'] += dt * i
                     res.append(nt)
+        elif n == 0:
+            df = itm.get('frame')
+            if df != 1:
+                dt = (total_time - itm.get('time')) / (df - 1)
+                for i in range(1, df):
+                    nt = copy.deepcopy(itm)
+                    nt['time'] += dt * i
+                    nt['size'] = 0
+                    res.append(nt)
         else:
             nitm = pre_list[n + 1]
             df = float(nitm.get('frame') - itm.get('frame'))
