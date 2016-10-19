@@ -38,8 +38,8 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         cls_choices = {'电影': 1, 'mv': 2, '搞笑': 3}
         json_data = json.loads(request.body)
         cls = json_data.get('classification')
-        total_frames = int(json_data.get('frames'), 0)
-        duration = json_data.get('duration')
+        total_frames = int(json_data.get('frames', 0))
+        duration = float(json_data.get('duration', 0.0))
         fps = json_data.get('fps')
         tracks = json_data.get('tracks')
         if tracks:
@@ -64,7 +64,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
             at = AvatarTrack.objects.filter(video=video)
             if at.exists():
                 at[0].delete()
-            tracks = unicode(format_tracks_data(tracks, total_frames))
+            tracks = unicode(format_tracks_data(tracks, total_frames, duration))
             AvatarTrack(data=tracks, video=video).save()
             return self.render_to_response({})
         self.message = '追踪数据缺失'
