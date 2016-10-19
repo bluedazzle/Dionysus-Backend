@@ -84,7 +84,7 @@ class VideoDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
         track_list = obj.video_tracks.all()
         if track_list.exists():
             track = track_list[0]
-            setattr(obj, 'tracks', eval(track))
+            setattr(obj, 'tracks', eval(track.data))
         else:
             setattr(obj, 'tracks', [])
         return obj
