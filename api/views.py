@@ -54,6 +54,9 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
                       thumb_nail=thumb_nail,
                       classification=cls).save()
             video = Video.objects.get(url=url)
+            at = AvatarTrack.objects.filter(video=video)
+            if at.exists():
+                at[0].delete()
             AvatarTrack(data=tracks, video=video).save()
             return self.render_to_response({})
         self.message = '追踪数据缺失'
@@ -104,7 +107,7 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
             if share.exists():
                 self.message = '视频已存在'
                 share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share[0].id)
-                return self.render_to_response({"url": share_url})
+                return self.render_to_response({"url": share_url, "thumb_nail": share[0].thumb_nail})
             key = url.split("/")[-1]
             pid = add_water_mask(key)
             if not pid:
@@ -115,7 +118,7 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
             Share(url=url, author=user, source=video, thumb_nail=thumb_nail, pid=pid, token=token).save()
             share = Share.objects.get(url=url, author=user)
             share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share.id)
-            return self.render_to_response({'url': share_url})
+            return self.render_to_response({'url': share_url, "thumb_nail": share.thumb_nail})
         self.message = '参数缺失'
         self.status_code = ERROR_DATA
         return self.render_to_response({})
