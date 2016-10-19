@@ -28,6 +28,9 @@ class Video(BaseModel):
     url = models.CharField(max_length=128, unique=True)
     classification = models.IntegerField(choices=cls_choices, default=1)
     like = models.IntegerField(default=0)
+    duration = models.FloatField(default=0.0)
+    fps = models.IntegerField(default=25)
+    total_frames = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.title

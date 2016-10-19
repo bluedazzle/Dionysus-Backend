@@ -11,6 +11,7 @@ from core.Mixin.StatusWrapMixin import *
 from core.dss.Mixin import MultipleJsonResponseMixin, JsonResponseMixin
 from core.models import Video, AvatarTrack, Share, MyUser
 from core.qn import delete_file, generate_upload_token, add_water_mask
+from core.tracks import format_tracks_data
 
 
 class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
@@ -37,6 +38,9 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         cls_choices = {'电影': 1, 'mv': 2, '搞笑': 3}
         json_data = json.loads(request.body)
         cls = json_data.get('classification')
+        total_frames = json_data.get('frames')
+        duration = json_data.get('duration')
+        fps = json_data.get('fps')
         tracks = json_data.get('tracks')
         if tracks:
             cls = cls_choices[cls]
@@ -52,11 +56,15 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
                       author=author,
                       reference=reference,
                       thumb_nail=thumb_nail,
+                      total_frames=total_frames,
+                      duration=duration,
+                      fps=fps,
                       classification=cls).save()
             video = Video.objects.get(url=url)
             at = AvatarTrack.objects.filter(video=video)
             if at.exists():
                 at[0].delete()
+            tracks = unicode(format_tracks_data(tracks, total_frames))
             AvatarTrack(data=tracks, video=video).save()
             return self.render_to_response({})
         self.message = '追踪数据缺失'
@@ -75,7 +83,8 @@ class VideoDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
         obj = super(VideoDetailView, self).get_object(queryset)
         track_list = obj.video_tracks.all()
         if track_list.exists():
-            setattr(obj, 'tracks', track_list)
+            track = track_list[0]
+            setattr(obj, 'tracks', eval(track))
         else:
             setattr(obj, 'tracks', [])
         return obj
