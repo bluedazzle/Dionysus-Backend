@@ -26,12 +26,13 @@ def format_tracks_data(data, total_frame, total_time):
         res.append(itm)
         if n == (len(pre_list) - 1):
             df = total_frame - itm.get('frame')
-            dt = (total_time - itm.get('time')) / df
-            for i in range(1, df + 1):
-                nt = copy.deepcopy(itm)
-                nt['frame'] += i
-                nt['time'] += dt * i
-                res.append(nt)
+            if df > 0:
+                dt = (total_time - itm.get('time')) / df
+                for i in range(1, df + 1):
+                    nt = copy.deepcopy(itm)
+                    nt['frame'] += i
+                    nt['time'] += dt * i
+                    res.append(nt)
         else:
             nitm = pre_list[n + 1]
             df = float(nitm.get('frame') - itm.get('frame'))
