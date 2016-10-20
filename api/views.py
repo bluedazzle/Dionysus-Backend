@@ -40,7 +40,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         cls = json_data.get('classification')
         total_frames = int(json_data.get('frames', 0))
         duration = float(json_data.get('duration', 0.0))
-        fps = json_data.get('fps')
+        fps = int(json_data.get('fps', 25))
         tracks = json_data.get('tracks')
         if tracks:
             cls = cls_choices[cls]
