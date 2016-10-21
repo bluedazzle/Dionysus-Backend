@@ -10,8 +10,6 @@ def format_tracks_data(data, total_frame, total_time):
         size = v.get('size')
         if size < 0:
             size = 144
-        elif size == 0:
-            size = 1
         s_dict = {'time': float("{:.02f}".format(float(k))),
                   'x': v.get("x"),
                   'y': v.get("y"),
