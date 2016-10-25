@@ -112,6 +112,8 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
         if url and uid and vid:
             user, created = MyUser.objects.get_or_create(uid=uid)
             video = Video.objects.get(id=vid)
+            video.like += 1
+            video.save()
             share = Share.objects.filter(token=token, author=user)
             if share.exists():
                 self.message = '视频已存在'
