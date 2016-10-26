@@ -31,6 +31,7 @@ class Video(BaseModel):
     duration = models.FloatField(default=0.0)
     fps = models.IntegerField(default=25)
     total_frames = models.IntegerField(default=0)
+    hidden = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.title
