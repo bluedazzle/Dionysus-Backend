@@ -16,7 +16,7 @@ from core.tracks import format_tracks_data
 
 class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
     model = Video
-    paginate_by = 10
+    paginate_by = 1
     http_method_names = ['get', 'post']
 
     def get_queryset(self):
@@ -26,7 +26,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         search = self.request.GET.get('search', None)
         if search:
             queryset = queryset.filter(title__icontains=search)
-        popular = self.request.GET.get('popular', None)
+        popular = self.request.GET.get('like', None)
         if popular:
             queryset = queryset.order_by('like')
         else:
@@ -107,7 +107,6 @@ class VideoModifyView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
         video = Video.objects.filter(id=vid)
         if video.exists():
             like = request.POST.get('like')
-            print like
             if like:
                 video = video[0]
                 video.like = like
