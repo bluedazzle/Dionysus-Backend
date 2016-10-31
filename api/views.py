@@ -97,6 +97,30 @@ class VideoDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
         return self.render_to_response({})
 
 
+class VideoModifyView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
+    model = Video
+    pk_url_kwarg = 'id'
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        vid = kwargs.get('id')
+        video = Video.objects.filter(id=vid)
+        if video.exists():
+            like = request.POST.get('like')
+            print like
+            if like:
+                video = video[0]
+                video.like = like
+                video.save()
+                return self.render_to_response({})
+            self.message = '数据缺失'
+            self.status_code = ERROR_DATA
+            return self.render_to_response({})
+        self.message = '视频不存在'
+        self.status_code = INFO_NO_EXIST
+        return self.render_to_response({})
+
+
 class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
     model = Share
     http_method_names = ['post']
