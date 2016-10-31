@@ -20,7 +20,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
     http_method_names = ['get', 'post']
 
     def get_queryset(self):
-        queryset = super(VideoListView, self).get_queryset().order_by("hidden", "-create_time")
+        queryset = super(VideoListView, self).get_queryset().order_by("-hidden", "-create_time")
         cls = self.request.GET.get('type', 1)
         all = self.request.GET.get('all', None)
         search = self.request.GET.get('search', None)
