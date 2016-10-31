@@ -16,7 +16,7 @@ from core.tracks import format_tracks_data
 
 class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
     model = Video
-    paginate_by = 1
+    paginate_by = 10
     http_method_names = ['get', 'post']
 
     def get_queryset(self):
