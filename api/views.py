@@ -19,7 +19,6 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
     paginate_by = 10
     http_method_names = ['get', 'post']
 
-    @property
     def get_queryset(self):
         queryset = super(VideoListView, self).get_queryset().order_by("-hidden", "-create_time")
         cls = self.request.GET.get('type', 1)
