@@ -31,12 +31,12 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
             queryset = queryset.filter(Q(title__icontains=search) |
                                        Q(reference__icontains=search) |
                                        Q(author__icontains=search))
-            print search, queryset.count()
+            print queryset.count()
         popular = self.request.GET.get('like', None)
         if popular:
             queryset = queryset.order_by('-like')
         else:
-            if not all:
+            if not all and not search:
                 queryset = queryset.filter(classification=cls)
         return queryset
 
