@@ -19,6 +19,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
     paginate_by = 10
     http_method_names = ['get', 'post']
 
+    @property
     def get_queryset(self):
         queryset = super(VideoListView, self).get_queryset().order_by("-hidden", "-create_time")
         cls = self.request.GET.get('type', 1)
@@ -28,7 +29,9 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         if not dev:
             queryset = queryset.filter(hidden=False).order_by("-create_time")
         if search:
-            queryset = queryset.filter(title__icontains=search)
+            queryset = queryset.filter(Q(title__icontains=search) |
+                                       Q(reference__icontains=search) |
+                                       Q(author__icaontains=search))
         popular = self.request.GET.get('like', None)
         if popular:
             queryset = queryset.order_by('-like')
