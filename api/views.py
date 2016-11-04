@@ -27,10 +27,11 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         dev = self.request.GET.get('dev', None)
         if not dev:
             queryset = queryset.filter(hidden=False).order_by("-create_time")
-        if search:
+        if search and search != '':
             queryset = queryset.filter(Q(title__icontains=search) |
                                        Q(reference__icontains=search) |
                                        Q(author__icontains=search))
+            print search, queryset.count()
         popular = self.request.GET.get('like', None)
         if popular:
             queryset = queryset.order_by('-like')
