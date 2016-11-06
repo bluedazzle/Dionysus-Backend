@@ -9,4 +9,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for itm in Video.objects.all():
             itm.url = itm.url.replace('oda176fz0.bkt.clouddn.com', 'static.fibar.cn')
+            itm.thumb_nail = itm.thumb_nail.replace('oda176fz0.bkt.clouddn.com', 'static.fibar.cn')
             itm.save()
