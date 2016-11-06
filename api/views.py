@@ -64,6 +64,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
                       thumb_nail=thumb_nail,
                       total_frames=total_frames,
                       duration=duration,
+                      hidden=True,
                       fps=fps,
                       classification=cls).save()
             video = Video.objects.get(url=url)
