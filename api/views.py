@@ -55,6 +55,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
             url = json_data.get('url')
             vs = Video.objects.filter(url=url)
             if not vs.exists():
+                url = url.replace('oda176fz0.bkt.clouddn.com', 'static.fibar.cn')
                 thumb_nail = '{0}?vframe/jpg/offset/1/w/200/h/200/'.format(url)
                 Video(title=title,
                       url=url,
@@ -208,7 +209,7 @@ class NotifyView(UpdateView):
             old_key = json_data.get('inputKey')
             new_key = json_data.get('items')[0].get('key')
             share = Share.objects.get(pid=pid)
-            url = 'http://oda176fz0.bkt.clouddn.com/{0}'.format(new_key)
+            url = 'http://static.fibar.cn/{0}'.format(new_key)
             thumb = '{0}?vframe/jpg/offset/1/w/200/h/200/'.format(url)
             share.url = url
             share.thumb_nail = thumb
