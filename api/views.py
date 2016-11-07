@@ -53,9 +53,9 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
             author = json_data.get('author')
             reference = json_data.get('reference')
             url = json_data.get('url')
+            url = url.replace('oda176fz0.bkt.clouddn.com', 'static.fibar.cn')
             vs = Video.objects.filter(url=url)
             if not vs.exists():
-                url = url.replace('oda176fz0.bkt.clouddn.com', 'static.fibar.cn')
                 thumb_nail = '{0}?vframe/jpg/offset/1/w/200/h/200/'.format(url)
                 Video(title=title,
                       url=url,
