@@ -14,7 +14,7 @@ class Command(BaseCommand):
             data = eval(at.data)
             for itm in data:
                 dw = itm['size']
-                dh = w * 1.33
+                dh = dw * 1.33
                 dw = dw / 2
                 itm['x'] += dw
                 itm['y'] += dh
