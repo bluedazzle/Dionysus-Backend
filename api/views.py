@@ -170,7 +170,13 @@ class ShareListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
     paginate_by = 10
     http_method_names = ['get']
     foreign = True
-    ordering = '-create_time'
+
+    # ordering = '-create_time'
+
+    def get_queryset(self):
+        queryset = super(ShareListView, self).get_queryset()
+        queryset = queryset.order_by('-create_time')
+        return queryset
 
 
 class ShareDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DeleteView):
