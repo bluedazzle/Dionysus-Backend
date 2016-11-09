@@ -171,7 +171,7 @@ class ShareListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
     http_method_names = ['get']
     foreign = True
 
-    ordering = ('-create_time',)
+    ordering = ('-create_time')
 
     # def get_queryset(self):
     #     queryset = super(ShareListView, self).get_queryset()
