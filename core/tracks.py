@@ -74,5 +74,6 @@ def format_tracks_data(data, total_frame, total_time):
                 res.append(s_dict)
 
     res.sort(key=lambda x: x['frame'])
-    res[-1]['time'] += 0.04
+    if res[-1]['time'] != total_time:
+        res[-1]['time'] = total_time
     return res
