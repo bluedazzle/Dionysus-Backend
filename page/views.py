@@ -15,7 +15,6 @@ class ShareDetailView(DetailView):
 
     def get_object(self, queryset=None):
         obj = super(ShareDetailView, self).get_object(queryset)
-        obj.visitor += self.get_random(obj.visitor)
         obj.views += 1
         obj.save()
         return obj
