@@ -67,10 +67,17 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
                       hidden=True,
                       fps=fps,
                       classification=cls).save()
+            else:
+                vs = vs[0]
+                vs.title = title
+                vs.author = author
+                vs.reference = reference
+                vs.save()
             video = Video.objects.get(url=url)
             at = AvatarTrack.objects.filter(video=video)
             if at.exists():
-                at[0].delete()
+                for itm in at:
+                    itm.delete()
             tracks = unicode(format_tracks_data(tracks, total_frames, duration))
             AvatarTrack(data=tracks, video=video).save()
             return self.render_to_response({})
