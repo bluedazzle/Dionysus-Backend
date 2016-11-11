@@ -104,6 +104,19 @@ class VideoDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
         return self.render_to_response({})
 
 
+class VideoDetailHiddenView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
+    model = Video
+    pk_url_kwarg = 'id'
+    http_method_names = ['get']
+
+    def get(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj:
+            obj.hidden = not obj.hidden
+            obj.save()
+        return self.render_to_response({})
+
+
 class VideoModifyView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
     model = Video
     pk_url_kwarg = 'id'
