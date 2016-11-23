@@ -2,10 +2,11 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 from Dionysus import settings
+from page.views import AppRedirectView
 
 urlpatterns = patterns('',
                        # Examples:
-                       # url(r'^$', 'Dionysus.views.home', name='home'),
+                       url(r'^$', AppRedirectView.as_view()),
                        # url(r'^blog/', include('blog.urls')),
 
                        url(r'^site_admin/', include(admin.site.urls)),

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 # Create your views here.
-from django.views.generic import DetailView, TemplateView
+from django.views.generic import DetailView, TemplateView, RedirectView
 
 from core.models import Share
 
@@ -25,3 +25,8 @@ class ShareDetailView(DetailView):
 
 class GuideView(TemplateView):
     template_name = 'guide.html'
+
+
+class AppRedirectView(RedirectView):
+    url = 'https://itunes.apple.com/cn/app/id1156043950'
+    http_method_names = ['get']
