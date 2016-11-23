@@ -26,7 +26,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         search = self.request.GET.get('search', None)
         dev = self.request.GET.get('dev', None)
         if not dev:
-            queryset = queryset.filter(hidden=False).order_by("-modify_time")
+            queryset = queryset.filter(hidden=False).order_by("-create_time")
         if search and search != '':
             queryset = queryset.filter(Q(title__icontains=search) |
                                        Q(reference__icontains=search) |
