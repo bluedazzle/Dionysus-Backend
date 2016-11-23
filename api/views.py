@@ -187,7 +187,7 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
 
 class ShareListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
     model = Share
-    paginate_by = 10
+    paginate_by = 50
     http_method_names = ['get']
     foreign = True
 
