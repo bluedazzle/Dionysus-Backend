@@ -178,7 +178,7 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
             thumb_nail = '{0}?vframe/jpg/offset/1/w/200/h/200/'.format(url)
             Share(url=url, author=user, source=video, thumb_nail=thumb_nail, pid=pid, token=token).save()
             share = Share.objects.get(url=url, author=user)
-            share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share.id)
+            share_url = 'http://www.datoushow.com/page/share/{0}'.format(share.id)
             return self.render_to_response({'url': share_url, "thumb_nail": share.thumb_nail})
         self.message = '参数缺失'
         self.status_code = ERROR_DATA

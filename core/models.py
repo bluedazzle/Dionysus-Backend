@@ -18,7 +18,8 @@ class Video(BaseModel):
     cls_choices = [
         (1, 'movie'),
         (2, 'mv'),
-        (3, 'funny')
+        (3, 'funny'),
+        (4, 'variety')
     ]
 
     title = models.CharField(max_length=128)

@@ -3,7 +3,7 @@
 
 ---
 
-**host: http://dionysus.fibar.cn**
+**host: http://datoushow.com**
 
 **api_version: v1**
 
@@ -55,6 +55,7 @@ GET /videos
 |1|电影|
 |2|mv|
 |3|搞笑|
+|4|综艺|
 
 ###**Return**
 成功
