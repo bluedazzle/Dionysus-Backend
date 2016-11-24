@@ -63,7 +63,8 @@ class MyUser(models.Model):
 
 class Share(BaseModel):
     pid = models.CharField(max_length=256, default='')
-    source = models.ForeignKey(Video, related_name='video_shares', on_delete=models.SET(Video.objects.get(url='del')))
+    source = models.ForeignKey(Video, related_name='video_shares', on_delete=models.SET_DEFAULT,
+                               default=Video.objects.get(url='del'))
     url = models.CharField(max_length=256)
     thumb_nail = models.CharField(max_length=256, default='')
     author = models.ForeignKey(MyUser, related_name='my_shares')
