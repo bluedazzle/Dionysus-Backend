@@ -40,7 +40,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         return queryset
 
     def post(self, request, *args, **kwargs):
-        cls_choices = {'电影': 1, 'mv': 2, '搞笑': 3}
+        cls_choices = {'电影': 1, 'mv': 2, '搞笑': 3, '综艺': 4}
         json_data = json.loads(request.body)
         cls = json_data.get('classification')
         total_frames = int(json_data.get('frames', 0))
