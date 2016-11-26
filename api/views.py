@@ -36,7 +36,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
             queryset = queryset.order_by('-like')
         else:
             if not all and not search:
-                queryset = queryset.filter(classification=cls)
+                queryset = queryset.filter(classification=cls).order_by('-order')
         return queryset
 
     def post(self, request, *args, **kwargs):
@@ -147,6 +147,29 @@ class VideoModifyView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
         return self.render_to_response({})
 
 
+class VideoOrderView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
+    model = Video
+    pk_url_kwarg = 'id'
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        vid = kwargs.get('id')
+        video = Video.objects.filter(id=vid)
+        if video.exists():
+            order = request.POST.get('order')
+            if order:
+                video = video[0]
+                video.order = order
+                video.save()
+                return self.render_to_response({})
+            self.message = '数据缺失'
+            self.status_code = ERROR_DATA
+            return self.render_to_response({})
+        self.message = '视频不存在'
+        self.status_code = INFO_NO_EXIST
+        return self.render_to_response({})
+
+
 class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
     model = Share
     http_method_names = ['post']
@@ -167,7 +190,7 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
             share = Share.objects.filter(token=token, author=user)
             if share.exists():
                 self.message = '视频已存在'
-                share_url = 'http://dionysus.fibar.cn/page/share/{0}'.format(share[0].id)
+                share_url = 'http://www.datoushow.com/page/share/{0}'.format(share[0].id)
                 return self.render_to_response({"url": share_url, "thumb_nail": share[0].thumb_nail})
             key = url.split("/")[-1]
             pid = add_water_mask(key)

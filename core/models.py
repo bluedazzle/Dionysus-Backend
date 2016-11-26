@@ -33,6 +33,7 @@ class Video(BaseModel):
     fps = models.IntegerField(default=25)
     total_frames = models.IntegerField(default=0)
     hidden = models.BooleanField(default=False)
+    order = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.title
@@ -63,8 +64,7 @@ class MyUser(models.Model):
 
 class Share(BaseModel):
     pid = models.CharField(max_length=256, default='')
-    source = models.ForeignKey(Video, related_name='video_shares', on_delete=models.SET_DEFAULT,
-                               default=Video.objects.get(url='del'))
+    source = models.ForeignKey(Video, related_name='video_shares', null=True, blank=True)
     url = models.CharField(max_length=256)
     thumb_nail = models.CharField(max_length=256, default='')
     author = models.ForeignKey(MyUser, related_name='my_shares')
