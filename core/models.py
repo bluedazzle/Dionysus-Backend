@@ -1,3 +1,4 @@
+# coding: utf-8
 from __future__ import unicode_literals
 
 from django.db import models
@@ -22,6 +23,8 @@ class Video(BaseModel):
         (4, 'variety')
     ]
 
+    default_title = '变身热门短视频中的主角，释放你的洪荒之力，快来一起玩吧~'
+
     title = models.CharField(max_length=128)
     author = models.CharField(max_length=128, null=True, blank=True)
     reference = models.CharField(max_length=128, null=True, blank=True)
@@ -34,6 +37,9 @@ class Video(BaseModel):
     total_frames = models.IntegerField(default=0)
     hidden = models.BooleanField(default=False)
     order = models.IntegerField(default=0)
+
+    weibo_title = models.TextField(default=default_title)
+    weichat_title = models.TextField(default=default_title)
 
     def __unicode__(self):
         return self.title
