@@ -189,10 +189,11 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
             video.save()
             share = Share.objects.filter(token=token, author=user)
             if share.exists():
+                share = share[0]
                 self.message = '视频已存在'
                 share_url = 'http://www.datoushow.com/page/share/{0}'.format(share[0].id)
                 return self.render_to_response({"url": share_url,
-                                                "thumb_nail": share[0].thumb_nail,
+                                                "thumb_nail": share.thumb_nail,
                                                 'weibo_title': share.source.weibo_title,
                                                 'wechat_title': share.source.weichat_title})
             key = url.split("/")[-1]
