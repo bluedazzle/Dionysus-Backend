@@ -191,7 +191,10 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
             if share.exists():
                 self.message = '视频已存在'
                 share_url = 'http://www.datoushow.com/page/share/{0}'.format(share[0].id)
-                return self.render_to_response({"url": share_url, "thumb_nail": share[0].thumb_nail})
+                return self.render_to_response({"url": share_url,
+                                                "thumb_nail": share[0].thumb_nail,
+                                                'weibo_title': share.source.weibo_title,
+                                                'wechat_title': share.source.weichat_title})
             key = url.split("/")[-1]
             pid = add_water_mask(key)
             if not pid:
