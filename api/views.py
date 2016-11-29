@@ -35,8 +35,9 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         if popular:
             queryset = queryset.order_by('-like')
         else:
-            queryset = queryset.filter(classification=cls)
-            if not all and not search and not dev:
+            if not all:
+                queryset = queryset.filter(classification=cls)
+            if not search and not dev:
                 queryset = queryset.order_by('-order', '-create_time')
         return queryset
 
