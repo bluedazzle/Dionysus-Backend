@@ -36,7 +36,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
             queryset = queryset.order_by('-like')
         else:
             if not all and not search:
-                queryset = queryset.filter(classification=cls).order_by('-order')
+                queryset = queryset.filter(classification=cls).order_by('-order', '-create_time')
         return queryset
 
     def post(self, request, *args, **kwargs):
