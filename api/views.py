@@ -197,7 +197,8 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
                 return self.render_to_response({"url": share_url,
                                                 "thumb_nail": share.thumb_nail,
                                                 'weibo_title': share.source.weibo_title,
-                                                'wechat_title': share.source.weichat_title})
+                                                'wechat_title': share.source.wechat_title,
+                                                'wechat_sub_title': share.source.wechat_sub_title})
             key = url.split("/")[-1]
             pid = add_water_mask(key)
             if not pid:
@@ -211,7 +212,8 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
             return self.render_to_response({'url': share_url,
                                             "thumb_nail": share.thumb_nail,
                                             'weibo_title': share.source.weibo_title,
-                                            'wechat_title': share.source.weichat_title})
+                                            'wechat_title': share.source.wechat_title,
+                                            'wechat_sub_title': share.source.wechat_sub_title})
         self.message = '参数缺失'
         self.status_code = ERROR_DATA
         return self.render_to_response({})

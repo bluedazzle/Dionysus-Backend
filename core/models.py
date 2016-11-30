@@ -39,7 +39,8 @@ class Video(BaseModel):
     order = models.IntegerField(default=0)
 
     weibo_title = models.TextField(default=default_title)
-    weichat_title = models.TextField(default=default_title)
+    wechat_title = models.TextField(default=default_title)
+    wechat_sub_title = models.TextField(default='')
 
     def __unicode__(self):
         return self.title
