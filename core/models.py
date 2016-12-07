@@ -70,7 +70,7 @@ class MyUser(models.Model):
 
 
 class Share(BaseModel):
-    pid = models.CharField(max_length=256, default='')
+    pid = models.CharField(max_length=256, default='', blank=True, null=True)
     source = models.ForeignKey(Video, related_name='video_shares', null=True, blank=True)
     url = models.CharField(max_length=256)
     thumb_nail = models.CharField(max_length=256, default='')
