@@ -206,7 +206,7 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
             #     self.status_code = ERROR_DATA
             #     return self.render_to_response({})
             thumb_nail = '{0}?vframe/jpg/offset/1/w/200/h/200/'.format(url)
-            Share(url=url, author=user, source=video, thumb_nail=thumb_nail, pid=pid, token=token).save()
+            Share(url=url, author=user, source=video, thumb_nail=thumb_nail, token=token).save()
             share = Share.objects.get(url=url, author=user)
             share_url = 'http://www.datoushow.com/page/share/{0}'.format(share.id)
             return self.render_to_response({'url': share_url,
