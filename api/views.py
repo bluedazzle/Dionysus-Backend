@@ -199,12 +199,12 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
                                                 'weibo_title': share.source.weibo_title,
                                                 'wechat_title': share.source.wechat_title,
                                                 'wechat_sub_title': share.source.wechat_sub_title})
-            key = url.split("/")[-1]
-            pid = add_water_mask(key)
-            if not pid:
-                self.message = '视频不存在或出现错误'
-                self.status_code = ERROR_DATA
-                return self.render_to_response({})
+            # key = url.split("/")[-1]
+            # pid = add_water_mask(key)
+            # if not pid:
+            #     self.message = '视频不存在或出现错误'
+            #     self.status_code = ERROR_DATA
+            #     return self.render_to_response({})
             thumb_nail = '{0}?vframe/jpg/offset/1/w/200/h/200/'.format(url)
             Share(url=url, author=user, source=video, thumb_nail=thumb_nail, pid=pid, token=token).save()
             share = Share.objects.get(url=url, author=user)
