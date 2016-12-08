@@ -55,7 +55,7 @@
     function is_weixn() {
         var ua = navigator.userAgent.toLowerCase();
         alert(ua);
-        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/weibo/) == 'weibo') {
             return false;
         } else {
             window.location.href = "Star://star";
