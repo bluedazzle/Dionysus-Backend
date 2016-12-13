@@ -9,9 +9,11 @@
 </head>
 <body onload="is_weixn()">
 <div style="height: 150px;"></div>
-<section class="ui-container ui-center" ><div style="font-weight: 900;font-size: larger;">请按照下面的示意图操作打开
-    <br>
-    大头秀 App</div>
+<section class="ui-container ui-center">
+    <div style="font-weight: 900;font-size: larger;">请按照下面的示意图操作打开
+        <br>
+        大头秀 App
+    </div>
     <br>
     <div class="instructions clearfix">
         <div style="float: left;">
@@ -57,7 +59,10 @@
         if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/weibo/) == 'weibo') {
             return false;
         } else {
-            window.location.href = "Star://star";
+            window.location = "Star://star";
+            setTimeout(function () {
+                window.location = "https://itunes.apple.com/cn/app/id1156043950";//如果超时就跳转到app下载页
+            }, 500);
         }
     }
 </script>
