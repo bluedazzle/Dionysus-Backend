@@ -59,10 +59,13 @@
         if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/weibo/) == 'weibo') {
             return false;
         } else {
-            window.location = "Star://star";
             setTimeout(function () {
-                window.location = "https://itunes.apple.com/cn/app/id1156043950";//如果超时就跳转到app下载页
-            }, 500);
+                var timeOutDateTime = new Date();
+                if (!loadDateTime || timeOutDateTime - loadDateTime < 1010) {
+                    window.location = "https://itunes.apple.com/cn/app/id1156043950";
+                }
+            }, 1000);
+            window.location = "Star://star";
         }
     }
 </script>
