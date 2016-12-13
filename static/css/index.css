@@ -1,0 +1,160 @@
+body {
+    margin: 0;
+    font-family: "Microsoft YaHei";
+}
+
+.index_banner {
+    width: 100%;
+    height: 1000px;
+}
+
+.mobile_banner {
+    width: 100%;
+    height: 700px;
+}
+
+.index_main {
+    height: 100%;
+    margin: 0 auto;
+}
+
+.index_logo {
+    padding-top: 27px;
+}
+
+.index_top {
+    height: 100%;
+    width: 100%;
+    background-color: #fa5653;
+    background-image: url(/s/image/back.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+.mobile_top {
+    height: 100%;
+    width: 100%;
+    background-image: url(/s/image/mobile_back.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+.index_download {
+    width: 989px;
+    height: 128px;
+    padding-left: 15px;
+    margin: 0 auto;
+    margin-top: 400px;
+}
+
+.index_download img {
+    float: left;
+}
+
+.download_button {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 450px;
+
+}
+
+.iphone {
+    width: 176px;
+    height: 46px;
+    background: url(/s/image/iphone.png) no-repeat 0 0;
+    display: block;
+}
+
+.android {
+    margin-top: 10px;
+    width: 220px;
+    height: 46px;
+    background: url(/s/image/android.png) no-repeat 0 0;
+    display: block;
+}
+
+.index_contact {
+    width: 989px;
+    height: 128px;
+    padding-left: 15px;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+
+.index_qq {
+    float: left;
+    margin-left: 14px;
+}
+
+.sina {
+    float: left;
+    height: 118px;
+    width: 118px;
+    background-image: url(/s/image/sina.png);
+    display: block;
+}
+
+.tel {
+    height: 53px;
+    width: 300px;
+    background-image: url(/s/image/cover.png);
+    display: block;
+    margin-bottom: 12px;
+    font-size: large;
+    color: black;
+}
+
+.index_text {
+    color: white;
+    margin-bottom: 15px;
+    font-size: large;
+}
+
+.tel_text {
+    float: left;
+    padding-left: 15px;
+    padding-top: 13px;
+}
+
+.tel_number {
+    padding-top: 13px;
+    padding-right: 15px;
+    float: right;
+}
+
+.footer {
+    background-color: #FF5A77;
+    padding: 5px;
+}
+
+.footer_logo {
+    margin-top: 5px;
+    float: left;
+}
+
+.logo_text {
+    float: right;
+    margin-left: 10px;
+}
+
+.footer_button {
+    float: right;
+    background: url(/s/image/down_button.png) no-repeat 0 0;
+    display: block;
+    width: 90px;
+    height: 36px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    .pc {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 801px) {
+    .mobile {
+        display: none;
+    }
+}

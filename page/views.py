@@ -27,6 +27,6 @@ class GuideView(TemplateView):
     template_name = 'guide.html'
 
 
-class AppRedirectView(RedirectView):
-    url = 'https://itunes.apple.com/cn/app/id1156043950'
+class AppRedirectView(TemplateView):
+    template_name = 'index.html'
     http_method_names = ['get']
