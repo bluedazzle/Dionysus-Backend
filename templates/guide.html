@@ -60,11 +60,8 @@
             return false;
         } else {
             setTimeout(function () {
-                var timeOutDateTime = new Date();
-                if (!loadDateTime || timeOutDateTime - loadDateTime < 1010) {
-                    window.location = "https://itunes.apple.com/cn/app/id1156043950";
-                }
-            }, 1000);
+                window.location = "https://itunes.apple.com/cn/app/id1156043950";
+            }, 25);
             window.location = "Star://star";
         }
     }
