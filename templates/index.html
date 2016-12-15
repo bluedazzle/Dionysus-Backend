@@ -42,17 +42,39 @@
     </div>
 </div>
 <div class="mobile">
-    <div class="mobile_banner">
-        <div class="index_main">
-            <div class="mobile_top">
-                <div class="index_logo"></div>
-                <div class="download_button">
-                    <a href="https://itunes.apple.com/cn/app/id1156043950" target="_blank" title="大头秀下载"
-                       class="iphone"></a>
-                    <a href="#" class="android"></a>
+    <div class="mobile_top">
+        <div class="mobile_main">
+            <div class="mobile_banner">
+                <img src="/s/image/mobile_back.png" alt="" style="height: 100%;width: 100%;">
+                <div class="mobile_btn">
+                    <div class="mobile_apple">
+                        <a href="https://itunes.apple.com/cn/app/id1156043950" target="_blank" title="大头秀下载"
+                        ></a>
+                    </div>
+                    <div class="mobile_android"><a href="#"></a></div>
+
+
                 </div>
+
+
             </div>
         </div>
+        <div class="mobile_video_title">
+                    <span>精彩视频</span>
+                </div>
+                <div class="video_list">
+                    <div class="ui-row">
+                        {% for share in share_list %}
+                        <li class="ui-col ui-col-50 video_li">
+                            <a href="{{ share.url }}" class="mobile_video" style="background: url({{ share.thumb_nail }}) no-repeat 0 0;background-size: contain;"></a>
+                            <span>{{ share.source.title }}</span>
+                        </li>
+                        {% endfor %}
+                    </div>
+                </div>
+            <div class="bottom">
+                <span>快下载大头秀app，秀出你的演技吧↘</span>
+            </div>
     </div>
     <footer class="ui-footer ui-footer-stable ui-border-t footer">
         <div class="footer_logo">

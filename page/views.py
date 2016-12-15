@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 # Create your views here.
-from django.views.generic import DetailView, TemplateView, RedirectView
+from django.views.generic import DetailView, TemplateView, RedirectView, ListView
 
 from core.models import Share
 
@@ -27,6 +27,11 @@ class GuideView(TemplateView):
     template_name = 'guide.html'
 
 
-class AppRedirectView(TemplateView):
+class AppRedirectView(ListView):
     template_name = 'index.html'
+    model = Share
     http_method_names = ['get']
+
+    def get_queryset(self):
+        queryset = super(AppRedirectView, self).get_queryset()
+        return queryset[:10]

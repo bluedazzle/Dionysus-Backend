@@ -9,8 +9,88 @@ body {
 }
 
 .mobile_banner {
+    height: 100%;
+}
+
+.mobile_top {
     width: 100%;
-    height: 700px;
+    position: relative;
+}
+
+.mobile_main {
+    width: 100%;
+}
+
+.mobile_btn {
+    position: absolute;
+    width: 90%;
+    padding-right: 5%;
+    padding-left: 5%;
+    top: 40%;
+    height: 36px;
+    z-index: 99;
+}
+
+.mobile_apple {
+    height: 36px;
+    width: 40%;
+    float: left;
+    margin-left: 6%;
+}
+
+.mobile_android {
+    height: 36px;
+    width: 53%;
+    float: right;
+}
+
+.mobile_apple a {
+    height: 36px;
+    width: 100%;
+    background: url(/s/image/iphone.png) no-repeat 0 0;
+    background-size: contain;
+    display: block;
+}
+
+.mobile_android a {
+    height: 36px;
+    width: 100%;
+    background: url(/s/image/android.png) no-repeat 0 0;
+    background-size: contain;
+    display: block;
+}
+
+.mobile_video_title {
+    height: 40px;
+    font-size: large;
+    color: #FF0F50;
+    background-color: #FFAFBD;
+    width: 100%;
+    margin-top: -7px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.mobile_video {
+    height: 190px;
+    width: 100%;
+    display: block;
+}
+
+.bottom {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    text-align: center;
+    color: #FF0F50;
+}
+
+.video_li {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.video_list {
+    width: 100%;
 }
 
 .index_main {
@@ -31,14 +111,6 @@ body {
     background-position: center top;
 }
 
-.mobile_top {
-    height: 100%;
-    width: 100%;
-    background-image: url(/s/image/mobile_back.png);
-    background-repeat: no-repeat;
-    background-position: center top;
-}
-
 .index_download {
     width: 989px;
     height: 128px;
@@ -54,7 +126,6 @@ body {
 .download_button {
     width: 50%;
     margin: 0 auto;
-    margin-top: 450px;
 
 }
 
