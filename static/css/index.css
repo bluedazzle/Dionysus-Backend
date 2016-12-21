@@ -44,7 +44,7 @@ body {
     float: right;
 }
 
-.mobile_apple a {
+.mobile_apple button {
     height: 36px;
     width: 100%;
     background: url(/s/image/iphone.png) no-repeat 0 0;

@@ -48,8 +48,8 @@
                 <img src="/s/image/mobile_back.png" alt="" style="height: 100%;width: 100%;">
                 <div class="mobile_btn">
                     <div class="mobile_apple">
-                        <a href="https://itunes.apple.com/cn/app/id1156043950" target="_blank" title="大头秀下载"
-                        ></a>
+                        <button onclick="is_weixn()" title="大头秀下载"
+                        ></button>
                     </div>
                     <div class="mobile_android"><a href="#"></a></div>
 
@@ -85,10 +85,23 @@
             </div>
 
         </div>
-        <a href="https://itunes.apple.com/cn/app/id1156043950" target="_blank" TITLE="大头秀" class="footer_button"></a>
+        <button class="footer_button" onclick="is_weixn()"></button>
     </footer>
 </div>
 <script src="//cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
 <script src="//cdn.bootcss.com/FrozenUI/1.3.0/lib/zepto.min.js"></script>
+<script>
+    function is_weixn() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            window.location.href = "/page/guide";
+        } else {
+            setTimeout(function () {
+                window.location = "https://itunes.apple.com/cn/app/id1156043950";
+            }, 25);
+            window.location = "Star://star";
+        }
+    }
+</script>
 </body>
 </html>
