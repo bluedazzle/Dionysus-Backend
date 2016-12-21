@@ -78,6 +78,7 @@ class Share(BaseModel):
     token = models.CharField(max_length=64, default='')
     visitor = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
+    recommend = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.author.uid

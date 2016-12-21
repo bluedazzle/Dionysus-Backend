@@ -62,16 +62,16 @@
         <div class="mobile_video_title">
                     <span>精彩视频</span>
                 </div>
-{#                <div class="video_list">#}
-{#                    <div class="ui-row">#}
-{#                        {% for share in share_list %}#}
-{#                        <li class="ui-col ui-col-50 video_li">#}
-{#                            <a href="/page/share/{{ share.id }}" class="mobile_video" style="background: url({{ share.thumb_nail }}) no-repeat 0 0;"></a>#}
-{#                            <span>{{ share.source.title }}</span>#}
-{#                        </li>#}
-{#                        {% endfor %}#}
-{#                    </div>#}
-{#                </div>#}
+                <div class="video_list">
+                    <div class="ui-row">
+                        {% for share in share_list %}
+                        <li class="ui-col ui-col-50 video_li">
+                            <a href="/page/share/{{ share.id }}" class="mobile_video" style="background: url({{ share.thumb_nail }}) no-repeat 0 0;"></a>
+                            <span>{{ share.source.title }}</span>
+                        </li>
+                        {% endfor %}
+                    </div>
+                </div>
             <div class="bottom">
                 <span>快下载大头秀app，秀出你的演技吧↘</span>
             </div>
