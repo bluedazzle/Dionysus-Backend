@@ -246,6 +246,18 @@ class ShareDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
         return self.render_to_response({})
 
 
+class ShareRecommendView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
+    model = Share
+    http_method_names = ['get']
+    pk_url_kwarg = 'id'
+
+    def get_object(self, queryset=None):
+        obj = super(ShareRecommendView, self).get_object(queryset)
+        obj.recommend = not obj.recommend
+        obj.save()
+        return self.render_to_response({})
+
+
 class UploadView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
     http_method_names = ['get']
 
