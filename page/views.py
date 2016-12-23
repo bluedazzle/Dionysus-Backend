@@ -33,6 +33,5 @@ class AppRedirectView(ListView):
     http_method_names = ['get']
 
     def get_queryset(self):
-        queryset = super(AppRedirectView, self).get_queryset().filter(recommend=True).order_by('-recommend',
-                                                                                               '-create_time')
+        queryset = super(AppRedirectView, self).get_queryset().filter(recommend=True).order_by('-create_time')
         return queryset

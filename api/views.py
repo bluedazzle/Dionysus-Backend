@@ -229,7 +229,7 @@ class ShareListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
 
     def get_queryset(self):
         queryset = super(ShareListView, self).get_queryset()
-        queryset = queryset.order_by('-create_time')
+        queryset = queryset.order_by('-recommend', '-create_time')
         return queryset
 
 
