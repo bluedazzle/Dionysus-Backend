@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 
 from api.views import VideoListView, VideoDetailView, ShareView, UploadView, ShareDetailView, ShareListView, NotifyView, \
-    VideoModifyView, VideoDetailHiddenView, VideoOrderView, ShareRecommendView
+    VideoModifyView, VideoDetailHiddenView, VideoOrderView, ShareRecommendView, RecordView
 
 urlpatterns = patterns('',
                        url(r'videos', VideoListView.as_view()),
@@ -13,6 +13,7 @@ urlpatterns = patterns('',
                        url(r'share/(?P<id>(\d)+)/recommend', ShareRecommendView.as_view()),
                        url(r'share/(?P<id>(\d)+)', ShareDetailView.as_view()),
                        url(r'share', ShareView.as_view()),
+                       url(r'record', RecordView.as_view()),
                        url(r'upload', UploadView.as_view()),
                        url(r'notify', NotifyView.as_view()),
                        )

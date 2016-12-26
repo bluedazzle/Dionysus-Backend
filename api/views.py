@@ -9,7 +9,7 @@ from django.views.generic import ListView, DetailView, DeleteView, View, UpdateV
 from core.Mixin.CheckMixin import CheckSecurityMixin
 from core.Mixin.StatusWrapMixin import *
 from core.dss.Mixin import MultipleJsonResponseMixin, JsonResponseMixin
-from core.models import Video, AvatarTrack, Share, MyUser
+from core.models import Video, AvatarTrack, Share, MyUser, Record
 from core.qn import delete_file, generate_upload_token, add_water_mask
 from core.tracks import format_tracks_data
 
@@ -216,6 +216,21 @@ class ShareView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailVi
                                             'wechat_sub_title': share.source.wechat_sub_title})
         self.message = '参数缺失'
         self.status_code = ERROR_DATA
+        return self.render_to_response({})
+
+
+class RecordView(StatusWrapMixin, JsonResponseMixin, DetailView):
+    model = Record
+    http_method_names = ['get']
+
+    def get(self, request, *args, **kwargs):
+        channel = int(request.GET.get('channel', 1))
+        obj, status = Record.objects.get_or_create(sign='record')
+        if channel == 1:
+            obj.ios_count += 1
+        else:
+            obj.android_count += 1
+        obj.save()
         return self.render_to_response({})
 
 
