@@ -124,7 +124,7 @@ body {
 }
 
 .download_button {
-    width: 50%;
+    width: 76%;
     margin: 0 auto;
 
 }
@@ -159,19 +159,19 @@ body {
 
 .sina {
     float: left;
-    height: 118px;
-    width: 118px;
+    height: 103px;
+    width: 103px;
     background-image: url(/s/image/sina.png);
     display: block;
 }
 
 .tel {
-    height: 53px;
-    width: 300px;
+    height: 45px;
+    width: 255px;
     background-image: url(/s/image/cover.png);
     display: block;
     margin-bottom: 12px;
-    font-size: large;
+    font-size: medium;
     color: black;
 }
 
