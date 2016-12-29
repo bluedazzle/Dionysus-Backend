@@ -152,6 +152,10 @@ body {
     margin-top: 150px;
 }
 
+.video_title {
+    font-size: small;
+}
+
 .index_qq {
     float: left;
     margin-left: 12px;
