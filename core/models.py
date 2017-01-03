@@ -37,7 +37,7 @@ class Video(BaseModel):
     total_frames = models.IntegerField(default=0)
     hidden = models.BooleanField(default=False)
     order = models.IntegerField(default=0)
-    tag = models.CharField(max_length=10, default='')
+    tag = models.CharField(max_length=10, default='', null=True, blank=True)
 
     weibo_title = models.TextField(default=default_title)
     wechat_title = models.TextField(default='', null=True, blank=True)
