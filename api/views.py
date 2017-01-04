@@ -236,7 +236,7 @@ class RecordView(StatusWrapMixin, JsonResponseMixin, DetailView):
 
 class ShareListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
     model = Share
-    paginate_by = 100
+    paginate_by = 200
     http_method_names = ['get']
     foreign = True
 
