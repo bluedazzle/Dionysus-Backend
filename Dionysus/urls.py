@@ -7,6 +7,7 @@ from page.views import AppRedirectView
 urlpatterns = patterns('',
                        # Examples:
                        url(r'^$', AppRedirectView.as_view()),
+                       url(r'^index/$', AppRedirectView.as_view()),
                        # url(r'^blog/', include('blog.urls')),
 
                        url(r'^site_admin/', include(admin.site.urls)),
