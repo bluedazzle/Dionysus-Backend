@@ -304,3 +304,13 @@ class NotifyView(UpdateView):
             share.save()
             delete_file(old_key)
         return HttpResponse('success')
+
+
+class ClickView(StatusWrapMixin, JsonResponseMixin, DetailView):
+    model = Record
+
+    def get_object(self, queryset=None):
+        obj = Record.objects.all()[0]
+        obj.click_count += 1
+        obj.save()
+

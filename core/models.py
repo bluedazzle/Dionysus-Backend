@@ -89,6 +89,7 @@ class Record(BaseModel):
     sign = models.CharField(unique=True, max_length=20)
     ios_count = models.IntegerField(default=0)
     android_count = models.IntegerField(default=0)
+    click_count = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.sign
