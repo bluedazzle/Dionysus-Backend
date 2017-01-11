@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'api',
     'myadmin',
     'corsheaders',
+    'xframeoptions',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +52,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'xframeoptions.middleware.Header',
 )
 
 ROOT_URLCONF = 'Dionysus.urls'
@@ -85,6 +87,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+X_FRAME_OPTIONS = 'http://www.growingio.com'
 
 
 # Static files (CSS, JavaScript, Images)
