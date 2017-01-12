@@ -2,7 +2,12 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 from Dionysus import settings
+from Dionysus.sitemap import ShareSitemap
 from page.views import AppRedirectView
+
+sitemaps = {
+    'share': ShareSitemap,
+}
 
 urlpatterns = patterns('',
                        # Examples:
@@ -15,6 +20,6 @@ urlpatterns = patterns('',
                        url(r'^admin/', include('myadmin.urls')),
                        url(r'^api/v1/', include('api.urls')),
                        url(r'^page/', include('page.urls')),
-
+                       url(r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
                        url(r'^s/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_MEDIA}),
                        )
