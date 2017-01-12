@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'myadmin',
     'corsheaders',
     'xframeoptions',
+    'django.contrib.sitemaps',
 )
 
 MIDDLEWARE_CLASSES = (
