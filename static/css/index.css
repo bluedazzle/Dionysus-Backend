@@ -111,6 +111,16 @@ body {
     background-position: center top;
 }
 
+.about_top {
+    height: 100%;
+    width: 100%;
+    background-color: #fa5653;
+    background-image: url(/s/image/aback.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+
 .index_download {
     width: 989px;
     height: 128px;
@@ -150,6 +160,14 @@ body {
     padding-left: 15px;
     margin: 0 auto;
     margin-top: 150px;
+}
+
+.about_index {
+    width: 989px;
+    height: 128px;
+    padding-left: 15px;
+    margin: 0 auto;
+    padding-top: 350px;
 }
 
 .video_title {

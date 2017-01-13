@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="baidu-site-verification" content="w9EkksAPp8"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="baidu-site-verification" content="FDJ73drJ9c"/>
+    <meta name="description"
+          content="大头秀是一款「录制换脸视频，变身搞笑短片主角」的app。轻松愉快的创作过程和丰富的可选素材，让你轻松秀出演技. 大头秀, 激萌, 搞怪, 搞笑, 短视频, 小视频制作">
+    <meta name="keywords" content="大头秀, 激萌, 搞怪, 搞笑, 短视频, 小视频制作">
+    <link href="//cdn.bootcss.com/FrozenUI/1.3.0/css/frozen-min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/s/css/index.css">
+    <link href="/s/image/header.png" rel="shortcut icon"/>
+    <title>大头秀-关于</title>
+</head>
+<body>
+<div class="">
+    <div class="index_banner">
+        <div class="index_main">
+            <div class="about_top">
+                <div class="about_index">
+                    <div class="index_text">产品介绍</div>
+                    <div style="color: white;">
+                        <h1>【全新的玩法】</h1>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;录制换脸视频，变身热门短片主角</p>
+                        <h1>【你可以】：</h1>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;变身宋小宝撒泼打滑，变身BigBang扮酷，变身陈奕迅深情款款唱情歌，变身至尊宝对唐僧发飙</p>
+                        <h1>【只需三步，释放你的演技】:</h1>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;1.挑选素材 - 找到最能激发你表演欲的素材</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;2.练习模式 - 找到最佳的表情和口型</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;3.开始录制 - 进行录制，尽情发挥你的演技吧</p>
+                    </div>
+                </div>
+                <div class="index_contact">
+                    <div class="index_text">关于我们</div>
+                    <div style="color: white;">
+                        <p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;北京江山如画网络科技有限责任公司，是一家由紫牛基金投资的初创型公司。</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;公司总部位于北京，公司的企业文化是搞怪、欢愉、创造力。公司目前专注于大头秀app，这是一款通过视频换脸的方式，轻松录制搞笑短视频的手机软件。</p>
+                    </div>
+                </div>
+                <div style="width: 989px; margin: 0 auto; padding-left: 15px;">
+                    <div class="index_text">联系我们</div>
+                    <div style="color: white;">
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;联系电话：010-88279790</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;联系QQ：3296963354</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;联系地址: 北京市海淀区复兴路甲38号嘉德公寓东侧423</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="//cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
+<script src="//cdn.bootcss.com/FrozenUI/1.3.0/lib/zepto.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    function count(channel) {
+        var url = '/api/v1/record';
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: {
+                'channel': channel
+            },
+            success: function (data) {
+
+            },
+            dataType: 'json'
+        })
+    }
+
+    function is_weixn() {
+        count(1);
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            window.location.href = "/page/guide";
+        } else {
+            setTimeout(function () {
+                window.location = "https://itunes.apple.com/cn/app/id1156043950";
+            }, 25);
+            window.location = "Star://star";
+        }
+    }
+</script>
+</body>
+</html>

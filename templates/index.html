@@ -2,30 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="baidu-site-verification" content="w9EkksAPp8" />
+    <meta name="baidu-site-verification" content="w9EkksAPp8"/>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="baidu-site-verification" content="FDJ73drJ9c" />
-    <meta name="description" content="大头秀是一款「录制换脸视频，变身搞笑短片主角」的app。轻松愉快的创作过程和丰富的可选素材，让你轻松秀出演技. 大头秀, 激萌, 搞怪, 搞笑, 短视频, 小视频制作">
+    <meta name="baidu-site-verification" content="FDJ73drJ9c"/>
+    <meta name="description"
+          content="大头秀是一款「录制换脸视频，变身搞笑短片主角」的app。轻松愉快的创作过程和丰富的可选素材，让你轻松秀出演技. 大头秀, 激萌, 搞怪, 搞笑, 短视频, 小视频制作">
     <meta name="keywords" content="大头秀, 激萌, 搞怪, 搞笑, 短视频, 小视频制作">
     <link href="//cdn.bootcss.com/FrozenUI/1.3.0/css/frozen-min.css" rel="stylesheet">
     <link rel="stylesheet" href="/s/css/index.css">
     <link href="/s/image/header.png" rel="shortcut icon"/>
     <title>大头秀-变身热门短视频主角</title>
     <script type='text/javascript'>
-      var _vds = _vds || [];
-      window._vds = _vds;
-      (function(){
-        _vds.push(['setAccountId', '8bac030e5dd1152a']);
-        (function() {
-          var vds = document.createElement('script');
-          vds.type='text/javascript';
-          vds.async = true;
-          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(vds, s);
+        var _vds = _vds || [];
+        window._vds = _vds;
+        (function () {
+            _vds.push(['setAccountId', '8bac030e5dd1152a']);
+            (function () {
+                var vds = document.createElement('script');
+                vds.type = 'text/javascript';
+                vds.async = true;
+                vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(vds, s);
+            })();
         })();
-      })();
-  </script>
+    </script>
 </head>
 <body>
 <div class="pc">
@@ -36,7 +37,8 @@
                 <div class="index_download">
                     <img src="/s/image/qrcode.png" alt="">
                     <div class="download_button">
-                        <a href="https://itunes.apple.com/cn/app/id1156043950" onclick="count(1)" target="_blank" title="大头秀下载"
+                        <a href="https://itunes.apple.com/cn/app/id1156043950" onclick="count(1)" target="_blank"
+                           title="大头秀下载"
                            class="iphone"></a>
                         <a href="#" onclick="count(2)" class="android"></a>
                     </div>
@@ -56,9 +58,16 @@
                         </a>
                     </div>
                 </div>
+                <footer style="height:50px;position:fixed;bottom:0px;left:0px;width: 100%; margin: 0 auto; color: white;text-align: center;">
+                    <a href="/about" style="color: white;">关于</a>
+
+                    <p style="color: white;font-size: 14px">Copyright© 北京江山如画网络科技有限责任公司 版权所有 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;鲁ICP备15029913号
+                    </p>
+                </footer>
             </div>
         </div>
     </div>
+
 </div>
 <div class="mobile">
     <div class="mobile_top">
@@ -79,21 +88,22 @@
             </div>
         </div>
         <div class="mobile_video_title">
-                    <span>精彩视频</span>
-                </div>
-                <div class="video_list">
-                    <div class="ui-row">
-                        {% for share in share_list %}
-                        <li class="ui-col ui-col-50 video_li">
-                            <a href="/page/share/{{ share.id }}" class="mobile_video" style="background: url({{ share.thumb_nail }}) no-repeat 0 0;"></a>
-                            <span class="video_title">{{ share.source.title }}</span>
-                        </li>
-                        {% endfor %}
-                    </div>
-                </div>
-            <div class="bottom">
-                <span>快下载大头秀app，秀出你的演技吧↘</span>
+            <span>精彩视频</span>
+        </div>
+        <div class="video_list">
+            <div class="ui-row">
+                {% for share in share_list %}
+                    <li class="ui-col ui-col-50 video_li">
+                        <a href="/page/share/{{ share.id }}" class="mobile_video"
+                           style="background: url({{ share.thumb_nail }}) no-repeat 0 0;"></a>
+                        <span class="video_title">{{ share.source.title }}</span>
+                    </li>
+                {% endfor %}
             </div>
+        </div>
+        <div class="bottom">
+            <span>快下载大头秀app，秀出你的演技吧↘</span>
+        </div>
     </div>
     <footer class="ui-footer ui-footer-stable ui-border-t footer">
         <div class="footer_logo">
@@ -108,7 +118,8 @@
     </footer>
 </div>
 <div style="display: none;">
-    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261043056'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261043056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1261043056'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261043056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
 <script src="//cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
 <script src="//cdn.bootcss.com/FrozenUI/1.3.0/lib/zepto.min.js"></script>
@@ -122,7 +133,7 @@
             data: {
                 'channel': channel
             },
-            success: function(data){
+            success: function (data) {
 
             },
             dataType: 'json'

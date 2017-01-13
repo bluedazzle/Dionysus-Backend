@@ -35,3 +35,7 @@ class AppRedirectView(ListView):
     def get_queryset(self):
         queryset = super(AppRedirectView, self).get_queryset().filter(recommend=True).order_by('-create_time')
         return queryset
+
+
+class AppAboutView(TemplateView):
+    template_name = 'about.html'
