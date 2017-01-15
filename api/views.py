@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import json
 
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView, DeleteView, View, UpdateView
 
 from core.Mixin.CheckMixin import CheckSecurityMixin
@@ -12,6 +13,7 @@ from core.dss.Mixin import MultipleJsonResponseMixin, JsonResponseMixin
 from core.models import Video, AvatarTrack, Share, MyUser, Record
 from core.qn import delete_file, generate_upload_token, add_water_mask
 from core.tracks import format_tracks_data
+from core.utils import serialize_srt
 
 
 class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
@@ -101,6 +103,9 @@ class VideoDetailView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
         if track_list.exists():
             track = track_list[0]
             setattr(obj, 'tracks', eval(track.data))
+            setattr(obj, 'has_subtitle', track.has_sub)
+            if track.has_sub:
+                setattr(obj, 'subtitle', eval(track.subtitle))
         else:
             setattr(obj, 'tracks', [])
         return obj
@@ -147,6 +152,38 @@ class VideoModifyView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, De
         self.message = '视频不存在'
         self.status_code = INFO_NO_EXIST
         return self.render_to_response({})
+
+
+class VideoSubTitleView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
+    model = Video
+    pk_url_kwarg = 'id'
+    http_method_names = ['post']
+
+    def get_object(self, queryset=None):
+        obj = super(VideoSubTitleView, self).get_object(queryset)
+        at = AvatarTrack.objects.get(video=obj)
+        return at, obj
+
+    def post(self, request, *args, **kwargs):
+        srt = request.FILES.get('srt', None)
+        if not srt:
+            self.message = '参数缺失'
+            self.status_code = ERROR_DATA
+            return HttpResponseRedirect('/admin/video')
+        try:
+            subtitles = serialize_srt(srt.file.read())
+            at, obj = self.get_object()
+            at.subtitle = str(subtitles)
+            at.has_sub = True
+            at.save()
+            obj.has_subtitle = True
+            obj.save()
+            return HttpResponseRedirect('/admin/video')
+        except Exception, e:
+            print e
+            self.message = '未知错误'
+            self.status_code = ERROR_UNKNOWN
+            return HttpResponseRedirect('/admin/video')
 
 
 class VideoOrderView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
@@ -313,4 +350,3 @@ class ClickView(StatusWrapMixin, JsonResponseMixin, DetailView):
         obj = Record.objects.all()[0]
         obj.click_count += 1
         obj.save()
-

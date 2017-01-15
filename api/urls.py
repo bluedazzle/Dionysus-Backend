@@ -1,11 +1,12 @@
 from django.conf.urls import patterns, url
 
 from api.views import VideoListView, VideoDetailView, ShareView, UploadView, ShareDetailView, ShareListView, NotifyView, \
-    VideoModifyView, VideoDetailHiddenView, VideoOrderView, ShareRecommendView, RecordView, ClickView
+    VideoModifyView, VideoDetailHiddenView, VideoOrderView, ShareRecommendView, RecordView, ClickView, VideoSubTitleView
 
 urlpatterns = patterns('',
                        url(r'videos', VideoListView.as_view()),
                        url(r'video/(?P<id>(\d)+)/like', VideoModifyView.as_view()),
+                       url(r'video/(?P<id>(\d)+)/subtitle', VideoSubTitleView.as_view()),
                        url(r'video/(?P<id>(\d)+)/order', VideoOrderView.as_view()),
                        url(r'video/(?P<id>(\d)+)/hidden', VideoDetailHiddenView.as_view()),
                        url(r'video/(?P<id>(\d)+)', VideoDetailView.as_view()),

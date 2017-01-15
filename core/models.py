@@ -38,6 +38,7 @@ class Video(BaseModel):
     hidden = models.BooleanField(default=False)
     order = models.IntegerField(default=0)
     tag = models.CharField(max_length=10, default='', null=True, blank=True)
+    has_subtitle = models.BooleanField(default=False)
 
     weibo_title = models.TextField(default=default_title)
     wechat_title = models.TextField(default='', null=True, blank=True)
@@ -50,6 +51,8 @@ class Video(BaseModel):
 class AvatarTrack(BaseModel):
     video = models.ForeignKey(Video, related_name='video_tracks')
     data = models.TextField()
+    subtitle = models.TextField(null=True, blank=True)
+    has_sub = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.video.title

@@ -7,9 +7,10 @@ import datetime
 import requests
 import time
 
+import srt
 from PIL import Image
 
-from HouseParty.settings import BASE_DIR
+from Dionysus.settings import BASE_DIR
 from core.models import Secret
 
 import random
@@ -69,3 +70,15 @@ def create_game_id(type='01'):
 
 def create_tournament_id(type='02'):
     return '{0}{1}{2}'.format(unicode(time.time()).replace('.', ''), type, random.randint(1000, 9999))
+
+
+def serialize_srt(srt_data):
+    subs = srt.parse(srt_data)
+    sub_list = []
+    for sub in subs:
+        sub_dict = {'index': sub.index,
+                    'start_time': unicode(sub.start),
+                    'end_time': unicode(sub.end),
+                    'content': sub.content}
+        sub_list.append(sub_dict)
+    return sub_list
