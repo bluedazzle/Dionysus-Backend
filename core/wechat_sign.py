@@ -24,10 +24,8 @@ class Sign:
 
     def sign(self, url, ticket):
         self.ret['url'] = url
+        self.ret['timestamp'] = self.__create_timestamp()
         self.ret['jsapi_ticket'] = ticket
         string = '&'.join(['%s=%s' % (key.lower(), self.ret[key]) for key in sorted(self.ret)])
         self.ret['signature'] = hashlib.sha1(string).hexdigest()
         return self.ret
-
-
-wechat_sign = Sign('wx8f04e633e9b5d33c', 'f5f8353ac90c783fdf71a05f9ee0c835')
