@@ -363,8 +363,11 @@ class WechatTokenView(StatusWrapMixin, JsonResponseMixin, DetailView):
                 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx8f04e633e9b5d33c&secret=f5f8353ac90c783fdf71a05f9ee0c835')
             token = json.loads(result.content).get('access_token')
             cache.set("access_token", token, 7200)
-        result = requests.get(
-            'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi'.format(token))
-        ticket = json.loads(result.content).get('ticket')
+        ticket = cache.get('ticket')
+        if not ticket:
+            result = requests.get(
+                'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi'.format(token))
+            ticket = json.loads(result.content).get('ticket')
+            cache.set('ticket', ticket, 7200)
         res = wechat_sign.sign(request.GET.get('url'), ticket)
         return self.render_to_response(res)
