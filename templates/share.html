@@ -51,6 +51,7 @@
 <script src="//cdn.bootcss.com/FrozenUI/1.3.0/lib/zepto.min.js"></script>
 <script src="//res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 <script>
+    var current = document.location.href;
     function is_weixn() {
         var url = '/api/v1/click';
         $.ajax({
@@ -97,7 +98,6 @@
         }
     });
     window.onload = function () {
-        var current = document.location.href;
         var url = '/api/v1/wechat/token?url=' + current;
         $.ajax({
             type: 'GET',
