@@ -7,20 +7,20 @@
     <link href="/s/image/header.png" rel="shortcut icon"/>
     <title>大头秀-分享-{{ share.source.title }}</title>
     <script type='text/javascript'>
-      var _vds = _vds || [];
-      window._vds = _vds;
-      (function(){
-        _vds.push(['setAccountId', '8bac030e5dd1152a']);
-        (function() {
-          var vds = document.createElement('script');
-          vds.type='text/javascript';
-          vds.async = true;
-          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(vds, s);
+        var _vds = _vds || [];
+        window._vds = _vds;
+        (function () {
+            _vds.push(['setAccountId', '8bac030e5dd1152a']);
+            (function () {
+                var vds = document.createElement('script');
+                vds.type = 'text/javascript';
+                vds.async = true;
+                vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(vds, s);
+            })();
         })();
-      })();
-  </script>
+    </script>
 </head>
 <body>
 <header class="ui-header ui-header-stable ui-border-b" style="background-color: #FF0F50; padding-top: 2px;">
@@ -44,17 +44,19 @@
     </video>
 </section>
 <div style="display: none;">
-    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261043056'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261043056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1261043056'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261043056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
 <script src="//cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
 <script src="//cdn.bootcss.com/FrozenUI/1.3.0/lib/zepto.min.js"></script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 <script>
     function is_weixn() {
         var url = '/api/v1/click';
         $.ajax({
             type: 'GET',
             url: url,
-            success: function(data){
+            success: function (data) {
 
             },
             dataType: 'json'
@@ -68,6 +70,49 @@
             }, 25);
             window.location = "Star://star";
         }
+    }
+    window.onload = function () {
+        var current = document.location.href;
+        var url = '/api/v1/wechat/token?url=' + current;
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                wx.config({
+                    debug: false,
+                    appId: 'wx8f04e633e9b5d33c',
+                    timestamp: data.body.timestamp,
+                    nonceStr: data.body.nonceStr,
+                    signature: data.body.signature,
+                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
+                });
+                wx.onMenuShareTimeline({
+                    title: '{{ share.source.title }}', // 分享标题
+                    link: current, // 分享链接
+                    imgUrl: '{{ share.source.thumb_nail }}', // 分享图标
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+                wx.onMenuShareAppMessage({
+                    title: '{{ share.source.title }}', // 分享标题
+                    desc: '{{ share.source.title }}', // 分享描述
+                    link: current, // 分享链接
+                    imgUrl: '{{ share.source.thumb_nail }}', // 分享图标
+                    type: 'video', // 分享类型,music、video或link，不填默认为link
+                    dataUrl: '{{ share.source.url }}', // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+            }
+        })
     }
 </script>
 </body>
