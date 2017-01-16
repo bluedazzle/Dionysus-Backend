@@ -71,7 +71,7 @@
             window.location = "Star://star";
         }
     }
-    window.onload = function () {
+    $(document).ready(function() {
         var current = document.location.href;
         var url = '/api/v1/wechat/token?url=' + current;
         $.ajax({
