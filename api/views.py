@@ -358,12 +358,14 @@ class ClickView(StatusWrapMixin, JsonResponseMixin, DetailView):
 class WechatTokenView(StatusWrapMixin, JsonResponseMixin, DetailView):
     def get(self, request, *args, **kwargs):
         token = cache.get('access_token')
+        token = None
+        ticket = None
         if not token:
             result = requests.get(
                 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx8f04e633e9b5d33c&secret=f5f8353ac90c783fdf71a05f9ee0c835')
             token = json.loads(result.content).get('access_token')
             cache.set("access_token", token, 7200)
-        ticket = cache.get('ticket')
+        # ticket = cache.get('ticket')
         if not ticket:
             result = requests.get(
                 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi'.format(token))
