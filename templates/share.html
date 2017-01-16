@@ -92,7 +92,7 @@
     };
     wx.ready(function () {
         wx.onMenuShareTimeline({
-            title: '大头秀-{{ share.source.title }}', // 分享标题
+            title: '{{ share.source.title }}', // 分享标题
             link: current, // 分享链接
             imgUrl: '{{ share.source.thumb_nail }}', // 分享图标
             success: function () {
@@ -103,7 +103,7 @@
             }
         });
         wx.onMenuShareAppMessage({
-            title: '大头秀-{{ share.source.title }}', // 分享标题
+            title: '{{ share.source.title }}', // 分享标题
             desc: '变身短视频主角, 演技好的盆友都在玩哦~', // 分享描述
             link: current, // 分享链接
             imgUrl: '{{ share.source.thumb_nail }}', // 分享图标
