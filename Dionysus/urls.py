@@ -3,7 +3,7 @@ from django.contrib import admin
 
 from Dionysus import settings
 from Dionysus.sitemap import ShareSitemap
-from page.views import AppRedirectView, AppAboutView
+from page.views import AppRedirectView, AppAboutView, VerifyView
 
 sitemaps = {
     'share': ShareSitemap,
@@ -12,6 +12,7 @@ sitemaps = {
 urlpatterns = patterns('',
                        # Examples:
                        url(r'^$', AppRedirectView.as_view()),
+                       url(r'^MP_verify_cdA6mAWxJKTxJyCb.txt', VerifyView.as_view()),
                        url(r'^about/$', AppAboutView.as_view()),
                        # url(r'^blog/', include('blog.urls')),
 

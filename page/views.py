@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 # Create your views here.
+from django.http import HttpResponse
 from django.views.generic import DetailView, TemplateView, RedirectView, ListView
 
 from core.models import Share
@@ -39,3 +40,9 @@ class AppRedirectView(ListView):
 
 class AppAboutView(TemplateView):
     template_name = 'about.html'
+
+
+class VerifyView(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('cdA6mAWxJKTxJyCb')
