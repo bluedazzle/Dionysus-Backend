@@ -71,25 +71,6 @@
             window.location = "Star://star";
         }
     }
-    window.onload = function () {
-        var current = document.location.href;
-        var url = '/api/v1/wechat/token?url=' + current;
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function (data) {
-                wx.config({
-                    debug: false,
-                    appId: 'wx8f04e633e9b5d33c',
-                    timestamp: data.body.timestamp,
-                    nonceStr: data.body.nonceStr,
-                    signature: data.body.signature,
-                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
-                });
-            }
-        });
-
-    };
     wx.onMenuShareTimeline({
         title: '{{ share.source.title }}', // 分享标题
         link: current, // 分享链接
@@ -115,6 +96,25 @@
             // 用户取消分享后执行的回调函数
         }
     });
+    window.onload = function () {
+        var current = document.location.href;
+        var url = '/api/v1/wechat/token?url=' + current;
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                wx.config({
+                    debug: true,
+                    appId: 'wx8f04e633e9b5d33c',
+                    timestamp: data.body.timestamp,
+                    nonceStr: data.body.nonceStr,
+                    signature: data.body.signature,
+                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
+                });
+            }
+        });
+
+    };
 </script>
 </body>
 </html>
