@@ -172,7 +172,8 @@ class VideoSubTitleView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, 
         if not srt:
             self.message = '参数缺失'
             self.status_code = ERROR_DATA
-            return HttpResponseRedirect('/admin/video')
+            # return HttpResponseRedirect('/admin/video')
+            return self.render_to_response({})
         try:
             subtitles = serialize_srt(srt.file.read())
             at, obj = self.get_object()
@@ -186,8 +187,8 @@ class VideoSubTitleView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, 
             print e
             self.message = '未知错误'
             self.status_code = ERROR_UNKNOWN
-            return HttpResponseRedirect('/admin/video')
-
+            # return HttpResponseRedirect('/admin/video')
+            return self.render_to_response({'error': e})
 
 class VideoOrderView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
     model = Video
