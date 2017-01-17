@@ -185,8 +185,8 @@ class VideoSubTitleView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, 
             return HttpResponseRedirect('/admin/video')
         except Exception, e:
             print e
-            self.message = '未知错误'
-            self.status_code = ERROR_UNKNOWN
+            # self.message = '未知错误'
+            # self.status_code = ERROR_UNKNOWN
             # return HttpResponseRedirect('/admin/video')
             return self.render_to_response({'error': e})
 
