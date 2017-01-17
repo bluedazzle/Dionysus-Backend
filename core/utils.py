@@ -1,9 +1,12 @@
 # coding: utf-8
 from __future__ import unicode_literals
 
+import copy
 import hashlib
 
 import datetime
+import re
+
 import requests
 import time
 
@@ -73,12 +76,31 @@ def create_tournament_id(type='02'):
 
 
 def serialize_srt(srt_data):
-    subs = srt.parse(srt_data)
-    sub_list = []
-    for sub in subs:
-        sub_dict = {'index': sub.index,
-                    'start_time': unicode(sub.start),
-                    'end_time': unicode(sub.end),
-                    'content': sub.content}
-        sub_list.append(sub_dict)
-    return sub_list
+    # subs = srt.parse(srt_data)
+    # sub_list = []
+    # for sub in subs:
+    #     sub_dict = {'index': sub.index,
+    #                 'start_time': unicode(sub.start),
+    #                 'end_time': unicode(sub.end),
+    #                 'content': sub.content}
+    #     sub_list.append(sub_dict)
+    # return sub_list
+    subs = []
+    sub = {'content': ''}
+    for line in srt_data:
+        line = line.decode('utf-8')
+        line = line.replace('\r\n', '')
+        line = line.replace('\n', '')
+        res = re.findall(r'\d+', line)
+        if len(res) == 1:
+            sub['index'] = int(res[0])
+        elif '-->' in line:
+            start, end = line.split('-->')
+            sub['start_time'] = start.replace(',', '.')
+            sub['end_time'] = end.replace(',', '.')
+        elif line == '':
+            subs.append(copy.copy(sub))
+            sub['content'] = ''
+        else:
+            sub['content'] += line
+    return subs
