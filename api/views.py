@@ -47,7 +47,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         return queryset
 
     def post(self, request, *args, **kwargs):
-        cls_choices = {'电影': 1, 'mv': 2, '搞笑': 3, '综艺': 4}
+        cls_choices = {'电影': 1, 'mv': 2, '搞笑': 3, '综艺': 4, '春节': 5}
         json_data = json.loads(request.body)
         cls = json_data.get('classification')
         total_frames = int(json_data.get('frames', 0))
@@ -55,7 +55,7 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         fps = int(json_data.get('fps', 25))
         tracks = json_data.get('tracks')
         if tracks:
-            cls = cls_choices[cls]
+            cls = cls_choices.get(cls, 1)
             title = json_data.get('title')
             author = json_data.get('author')
             reference = json_data.get('reference')
