@@ -12,7 +12,7 @@ from django.views.generic import ListView, DetailView, DeleteView, View, UpdateV
 from core.Mixin.CheckMixin import CheckSecurityMixin
 from core.Mixin.StatusWrapMixin import *
 from core.dss.Mixin import MultipleJsonResponseMixin, JsonResponseMixin
-from core.models import Video, AvatarTrack, Share, MyUser, Record
+from core.models import Video, AvatarTrack, Share, MyUser, Record, Banner
 from core.qn import delete_file, generate_upload_token, add_water_mask
 from core.tracks import format_tracks_data
 from core.utils import serialize_srt
@@ -190,6 +190,7 @@ class VideoSubTitleView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, 
             # return HttpResponseRedirect('/admin/video')
             return self.render_to_response({'error': e})
 
+
 class VideoOrderView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
     model = Video
     pk_url_kwarg = 'id'
@@ -354,6 +355,15 @@ class ClickView(StatusWrapMixin, JsonResponseMixin, DetailView):
         obj = Record.objects.all()[0]
         obj.click_count += 1
         obj.save()
+
+
+class BannerListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
+    model = Banner
+
+    def get_queryset(self):
+        queryset = super(BannerListView, self).get_queryset()
+        queryset = queryset.filter(active=True)
+        return queryset
 
 
 class WechatTokenView(StatusWrapMixin, JsonResponseMixin, DetailView):

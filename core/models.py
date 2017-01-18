@@ -96,3 +96,13 @@ class Record(BaseModel):
 
     def __unicode__(self):
         return self.sign
+
+
+class Banner(BaseModel):
+    picture = models.CharField(max_length=256)
+    nav = models.IntegerField(default=0)
+    active = models.BooleanField(default=True)
+    remark = models.CharField(max_length=128, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.remark
