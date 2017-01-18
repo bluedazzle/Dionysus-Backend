@@ -20,7 +20,8 @@ class Video(BaseModel):
         (1, 'movie'),
         (2, 'mv'),
         (3, 'funny'),
-        (4, 'variety')
+        (4, 'variety'),
+        (5, 'spring'),
     ]
 
     default_title = '变身热门短视频中的主角，释放你的洪荒之力，快来一起玩吧~'
