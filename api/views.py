@@ -174,21 +174,21 @@ class VideoSubTitleView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, 
             self.status_code = ERROR_DATA
             # return HttpResponseRedirect('/admin/video')
             return self.render_to_response({})
-        try:
-            subtitles = serialize_srt(srt.file.readlines())
-            at, obj = self.get_object()
-            at.subtitle = str(subtitles)
-            at.has_sub = True
-            at.save()
-            obj.has_subtitle = True
-            obj.save()
-            return HttpResponseRedirect('/admin/video')
-        except Exception, e:
-            print e
-            # self.message = '未知错误'
-            # self.status_code = ERROR_UNKNOWN
-            # return HttpResponseRedirect('/admin/video')
-            return self.render_to_response({'error': e})
+        # try:
+        subtitles = serialize_srt(srt.file.readlines())
+        at, obj = self.get_object()
+        at.subtitle = str(subtitles)
+        at.has_sub = True
+        at.save()
+        obj.has_subtitle = True
+        obj.save()
+        return HttpResponseRedirect('/admin/video')
+        # except Exception, e:
+        #     print e
+        #     # self.message = '未知错误'
+        #     # self.status_code = ERROR_UNKNOWN
+        #     # return HttpResponseRedirect('/admin/video')
+        #     return self.render_to_response({'error': e})
 
 
 class VideoOrderView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):

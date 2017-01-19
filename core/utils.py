@@ -85,22 +85,21 @@ def serialize_srt(srt_data):
     #                 'content': sub.content}
     #     sub_list.append(sub_dict)
     # return sub_list
+    block_list = []
     subs = []
-    sub = {'content': ''}
-    for line in srt_data:
-        line = line.decode('utf-8')
-        line = line.replace('\r\n', '')
-        line = line.replace('\n', '')
-        res = re.findall(r'\d+', line)
-        if len(res) == 1:
-            sub['index'] = int(res[0])
-        elif '-->' in line:
-            start, end = line.split('-->')
-            sub['start_time'] = start.replace(',', '.')
-            sub['end_time'] = end.replace(',', '.')
-        elif line == '':
-            subs.append(copy.copy(sub))
-            sub['content'] = ''
-        else:
-            sub['content'] += line
+    start = 0
+    for i, line in enumerate(srt_data):
+        if line == '\r\n':
+            block_list.append(srt_data[start: i])
+            start = i + 1
+    for block in block_list:
+        sub = {}
+        if len(block) == 3:
+            block = map(lambda x: x.decode('utf-8').replace('\r\n', ''), block)
+            sub['index'] = block[0]
+            start, end = block[1].replace(',', '.').split('-->')
+            sub['start_time'] = start.strip()
+            sub['end_time'] = end.strip()
+            sub['content'] = block[2]
+            subs.append(sub)
     return subs
