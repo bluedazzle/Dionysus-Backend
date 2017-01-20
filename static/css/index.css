@@ -55,7 +55,7 @@ body {
 .mobile_android a {
     height: 36px;
     width: 100%;
-    background: url(/s/image/android.png) no-repeat 0 0;
+    background: url(/s/image/android_down.png) no-repeat 0 0;
     background-size: contain;
     display: block;
 }
