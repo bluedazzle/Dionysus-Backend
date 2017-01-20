@@ -143,7 +143,7 @@
     function is_weixn() {
         count(1);
         var ua = navigator.userAgent.toLowerCase();
-        if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/MicroMessenger/i) == "meipai") {
+        if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/meipai/i) == "meipai") {
             window.location.href = "/page/guide";
         } else {
             setTimeout(function () {
@@ -155,7 +155,7 @@
         function is_weixn_a() {
         count(2);
         var ua = navigator.userAgent.toLowerCase();
-        if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/MicroMessenger/i) == "meipai") {
+        if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/meipai/i) == "meipai") {
             window.location.href = "/page/guide";
         } else {
             setTimeout(function () {
