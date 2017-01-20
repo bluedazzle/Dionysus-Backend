@@ -75,7 +75,7 @@
 <script>
     function is_weixn() {
         var ua = navigator.userAgent.toLowerCase();
-        if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/weibo/) == 'weibo') {
+        if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/weibo/) == 'weibo' || ua.match(/meipai/i) == "meipai") {
             return false;
         } else {
             setTimeout(function () {
