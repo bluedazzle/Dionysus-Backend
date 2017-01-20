@@ -107,3 +107,13 @@ class Banner(BaseModel):
 
     def __unicode__(self):
         return self.remark
+
+
+class Classification(BaseModel):
+    name = models.CharField(max_length=10)
+    type = models.IntegerField(unique=True)
+    icon = models.CharField(max_length=128)
+    select_icon = models.CharField(max_length=128)
+
+    def __unicode__(self):
+        return self.name

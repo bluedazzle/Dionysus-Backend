@@ -253,6 +253,7 @@ get /upload
 
 ```
 
+
 ##**获取banner信息**
 ```
 get /banners
@@ -287,16 +288,62 @@ get /banners
   },
   "status": 1,
   "msg": "success"
-}```
+}
+
+```
+
 失败
+
 ```
 {
   "body": {},
   "status": 4,
   "msg": "数据缺失"
 }
-
 ```
 
 
+##**获取分类信息**
+```
+get /classifications
+```
 
+###**Return**
+
+|type码|状态|
+| --------------  | :---: |
+|1|电影|
+|2|mv|
+|3|搞笑|
+|4|综艺|
+|5|新年|
+
+成功
+```
+{
+  "body": {
+    "classification_list": [
+      {
+        "select_icon": "http://static.fibar.cn/bannerz.png",
+        "type": 1,
+        "name": "搞笑",
+        "icon": "http://static.fibar.cn/bannerz.png"
+      }
+    ],
+    "page_obj": {},
+    "is_paginated": false
+  },
+  "status": 1,
+  "msg": "success"
+}
+```
+
+失败
+
+```
+{
+  "body": {},
+  "status": 4,
+  "msg": "数据缺失"
+}
+```
