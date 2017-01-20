@@ -3,7 +3,7 @@ from django.conf.urls import patterns, url
 from api.views import VideoListView, VideoDetailView, ShareView, UploadView, ShareDetailView, ShareListView, NotifyView, \
     VideoModifyView, VideoDetailHiddenView, VideoOrderView, ShareRecommendView, RecordView, ClickView, \
     VideoSubTitleView, \
-    WechatTokenView, BannerListView, ClassificationListView
+    WechatTokenView, BannerListView, ClassificationListView, UpdateView
 
 urlpatterns = patterns('',
                        url(r'videos', VideoListView.as_view()),
@@ -22,5 +22,6 @@ urlpatterns = patterns('',
                        url(r'click', ClickView.as_view()),
                        url(r'banners', BannerListView.as_view()),
                        url(r'classifications', ClassificationListView.as_view()),
+                       url(r'update', UpdateView.as_view()),
                        url(r'wechat/token', WechatTokenView.as_view()),
                        )

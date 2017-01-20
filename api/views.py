@@ -12,7 +12,7 @@ from django.views.generic import ListView, DetailView, DeleteView, View, UpdateV
 from core.Mixin.CheckMixin import CheckSecurityMixin
 from core.Mixin.StatusWrapMixin import *
 from core.dss.Mixin import MultipleJsonResponseMixin, JsonResponseMixin
-from core.models import Video, AvatarTrack, Share, MyUser, Record, Banner, Classification
+from core.models import Video, AvatarTrack, Share, MyUser, Record, Banner, Classification, Update
 from core.qn import delete_file, generate_upload_token, add_water_mask
 from core.tracks import format_tracks_data
 from core.utils import serialize_srt
@@ -370,6 +370,14 @@ class ClassificationListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonRe
     model = Classification
     exclude_attr = ['create_time', 'modify_time', 'id']
     ordering = 'index'
+
+
+class UpdateView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
+    model = Update
+
+    def get_object(self, queryset=None):
+        obj = Update.objects.all()[0]
+        return obj
 
 
 class WechatTokenView(StatusWrapMixin, JsonResponseMixin, DetailView):
