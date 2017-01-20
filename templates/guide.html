@@ -2,26 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-{#    <meta name="apple-itunes-app" content="app-id=1156043950">#}
+    {#    <meta name="apple-itunes-app" content="app-id=1156043950">#}
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="/s/image/header.png" rel="shortcut icon"/>
     <link href="//cdn.bootcss.com/FrozenUI/1.3.0/css/frozen-min.css" rel="stylesheet">
     <title>大头秀 - App 引导</title>
     <script type='text/javascript'>
-      var _vds = _vds || [];
-      window._vds = _vds;
-      (function(){
-        _vds.push(['setAccountId', '8bac030e5dd1152a']);
-        (function() {
-          var vds = document.createElement('script');
-          vds.type='text/javascript';
-          vds.async = true;
-          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(vds, s);
+        var _vds = _vds || [];
+        window._vds = _vds;
+        (function () {
+            _vds.push(['setAccountId', '8bac030e5dd1152a']);
+            (function () {
+                var vds = document.createElement('script');
+                vds.type = 'text/javascript';
+                vds.async = true;
+                vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(vds, s);
+            })();
         })();
-      })();
-  </script>
+    </script>
 </head>
 <body onload="is_weixn()">
 <div style="height: 150px;"></div>
@@ -67,19 +67,38 @@
     </div>
 </section>
 <div style="display: none;">
-    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261043056'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261043056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1261043056'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261043056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
 </body>
 <script src="//cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
 <script src="//cdn.bootcss.com/FrozenUI/1.3.0/lib/zepto.min.js"></script>
 <script>
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
     function is_weixn() {
         var ua = navigator.userAgent.toLowerCase();
         if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/weibo/) == 'weibo' || ua.match(/meipai/i) == "meipai") {
             return false;
         } else {
             setTimeout(function () {
-                window.location = "https://itunes.apple.com/cn/app/id1156043950";
+                var req = GetRequest();
+                var from = req['from'];
+                if (from=='ios'){
+                    window.location = "https://itunes.apple.com/cn/app/id1156043950";
+                }else{
+                    window.location = "http://static.fibar.cn/datoushow_newest.apk";
+                }
             }, 25);
             window.location = "Star://star";
         }
