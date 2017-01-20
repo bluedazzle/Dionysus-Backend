@@ -120,11 +120,11 @@ class Classification(BaseModel):
         return self.name
 
 
-
 class Update(BaseModel):
     android_verison = models.CharField(max_length=10)
     android_download = models.CharField(max_length=128)
+    android_title = models.CharField(max_length=128)
+    android_log = models.TextField()
 
     def __unicode__(self):
         return self.android_verison
-

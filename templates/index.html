@@ -40,7 +40,7 @@
                         <a href="https://itunes.apple.com/cn/app/id1156043950" onclick="count(1)" target="_blank"
                            title="大头秀下载"
                            class="iphone"></a>
-                        <a href="http://static.fibar.cn/datoushow_newest.apk" onclick="count(2)" class="android"></a>
+                        <a href="#" onclick="is_weixn_a()" class="android"></a>
                     </div>
                 </div>
                 <div class="index_contact">
@@ -79,7 +79,7 @@
                         <button onclick="is_weixn()" title="大头秀下载"
                         ></button>
                     </div>
-                    <div class="mobile_android"><a href="http://static.fibar.cn/datoushow_newest.apk" onclick="count(2)"></a></div>
+                    <div class="mobile_android"><a href="#" onclick="is_weixn_a()"></a></div>
 
 
                 </div>
@@ -143,11 +143,23 @@
     function is_weixn() {
         count(1);
         var ua = navigator.userAgent.toLowerCase();
-        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/MicroMessenger/i) == "meipai") {
             window.location.href = "/page/guide";
         } else {
             setTimeout(function () {
                 window.location = "https://itunes.apple.com/cn/app/id1156043950";
+            }, 25);
+            window.location = "Star://star";
+        }
+    }
+        function is_weixn_a() {
+        count(2);
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/MicroMessenger/i) == "meipai") {
+            window.location.href = "/page/guide";
+        } else {
+            setTimeout(function () {
+                window.location = "http://static.fibar.cn/datoushow_newest.apk";
             }, 25);
             window.location = "Star://star";
         }
