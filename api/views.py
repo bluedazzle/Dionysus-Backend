@@ -369,7 +369,7 @@ class BannerListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMi
 class ClassificationListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMixin, ListView):
     model = Classification
     exclude_attr = ['create_time', 'modify_time', 'id']
-    ordering = '-index'
+    ordering = 'index'
 
 
 class WechatTokenView(StatusWrapMixin, JsonResponseMixin, DetailView):
