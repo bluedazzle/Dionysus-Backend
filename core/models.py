@@ -114,6 +114,7 @@ class Classification(BaseModel):
     type = models.IntegerField(unique=True)
     icon = models.CharField(max_length=128)
     select_icon = models.CharField(max_length=128)
+    index = models.IntegerField(default=1)
 
     def __unicode__(self):
         return self.name
