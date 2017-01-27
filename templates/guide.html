@@ -89,7 +89,6 @@
     function is_weixn() {
         var ua = navigator.userAgent.toLowerCase();
         if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/weibo/) == 'weibo' || ua.match(/meipai/i) == "meipai") {
-{#            window.location = "http://static.fibar.cn/datoushow_newest.apk";#}
             return false;
         } else {
             setTimeout(function () {
