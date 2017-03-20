@@ -402,6 +402,7 @@ class WechatTokenView(StatusWrapMixin, JsonResponseMixin, DetailView):
 
 class OutPutView(ListView):
     model = Video
+    template_name = 'about.html'
 
     def get_queryset(self):
         queryset = super(OutPutView, self).get_queryset()
