@@ -400,7 +400,7 @@ class WechatTokenView(StatusWrapMixin, JsonResponseMixin, DetailView):
         return self.render_to_response(res)
 
 
-class OutPutView(ListView):
+class OutPutView(StatusWrapMixin, JsonResponseMixin, ListView):
     model = Video
     template_name = 'about.html'
 
