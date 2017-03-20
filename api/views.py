@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import json
 import requests
+import xlwt as xlwt
 
 from django.core.cache import cache
 from django.db.models import Q
@@ -396,3 +397,25 @@ class WechatTokenView(StatusWrapMixin, JsonResponseMixin, DetailView):
             cache.set('ticket', ticket, 7200)
         res = wechat_sign.sign(request.GET.get('url'), ticket)
         return self.render_to_response(res)
+
+
+class OutPutView(ListView):
+    model = Video
+
+    def get_queryset(self):
+        queryset = super(OutPutView, self).get_queryset()
+        wb = xlwt.Workbook(encoding='utf-8')
+        now_time = time.clock()
+        ws = wb.add_sheet(str(now_time))
+        ws.write(0, 0, "标题")
+        ws.write(0, 1, "作者")
+        ws.write(0, 2, "分类")
+        i = 1
+        for itm in queryset:
+            ws.write(i, 0, itm.title)
+            ws.write(i, 1, itm.author)
+            ws.write(i, 2, itm.cls_choices[itm.classification - 1][1])
+            i += 1
+        wb.save("static/file/output.xls")
+        return HttpResponseRedirect("/static/file/output.xls")
+
