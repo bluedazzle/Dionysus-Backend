@@ -404,8 +404,8 @@ class OutPutView(StatusWrapMixin, JsonResponseMixin, ListView):
     model = Video
     template_name = 'about.html'
 
-    def get_queryset(self):
-        queryset = super(OutPutView, self).get_queryset()
+    def get(self, request, *args, **kwargs):
+        queryset = Video.objects.all()
         wb = xlwt.Workbook(encoding='utf-8')
         now_time = time.clock()
         ws = wb.add_sheet(str(now_time))
