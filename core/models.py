@@ -38,6 +38,8 @@ class Video(BaseModel):
     total_frames = models.IntegerField(default=0)
     hidden = models.BooleanField(default=False)
     order = models.IntegerField(default=0)
+    level = models.IntegerField(default=0)
+    change = models.BooleanField(default=False)
     tag = models.CharField(max_length=10, default='', null=True, blank=True)
     has_subtitle = models.BooleanField(default=False)
 

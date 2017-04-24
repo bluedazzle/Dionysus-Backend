@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 import json
+import random
+
 import requests
 import time
 import xlwt as xlwt
@@ -400,7 +402,7 @@ class WechatTokenView(StatusWrapMixin, JsonResponseMixin, DetailView):
         return self.render_to_response(res)
 
 
-class OutPutView(StatusWrapMixin, JsonResponseMixin, ListView):
+class OutPutView(StatusWrapMixin, JsonResponseMixin, DetailView):
     model = Video
     template_name = 'about.html'
 
@@ -409,15 +411,82 @@ class OutPutView(StatusWrapMixin, JsonResponseMixin, ListView):
         wb = xlwt.Workbook(encoding='utf-8')
         now_time = time.clock()
         ws = wb.add_sheet(str(now_time))
-        ws.write(0, 0, "标题")
-        ws.write(0, 1, "作者")
-        ws.write(0, 2, "分类")
+        ws.write(0, 0, "id")
+        ws.write(0, 1, "标题")
+        ws.write(0, 2, "作者")
+        ws.write(0, 3, "分类")
+        ws.write(0, 4, "等级")
         i = 1
         for itm in queryset:
-            ws.write(i, 0, itm.title)
-            ws.write(i, 1, itm.author)
-            ws.write(i, 2, itm.cls_choices[itm.classification - 1][1])
+            ws.write(i, 0, itm.id)
+            ws.write(i, 1, itm.title)
+            ws.write(i, 2, itm.author)
+            ws.write(i, 3, itm.cls_choices[itm.classification - 1][1])
             i += 1
         wb.save("static/file/output.xls")
         return HttpResponseRedirect("/static/file/output.xls")
 
+    def post(self, request, *args, **kwargs):
+        data = request.FILES.get('data')
+        if not data:
+            self.message = 'data required'
+            self.status_code = ERROR_DATA
+            return self.render_to_response({})
+        lines = data.read().split(str('\n'))
+        for line in lines[1:]:
+            line = line.split(',')
+            vid, level = line[0], line[-1]
+            try:
+                video = Video.objects.get(id=vid)
+                video.level = level
+                video.save()
+            except Exception as e:
+                continue
+        return self.render_to_response({})
+
+
+class ChangeVideoOrderView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixin, DetailView):
+    model = Video
+    queryset = None
+
+    def get(self, request, *args, **kwargs):
+        change_list = Video.objects.filter(change=True)
+        for itm in change_list:
+            itm.change = False
+            itm.order = 0
+            itm.like = 0
+            itm.save()
+
+        for i in range(1, 6):
+            self.change_order(i)
+
+        self.queryset = Video.objects.filter(level=1)
+        for i in range(10):
+            obj = self.get_random_item()
+            obj.like = 10000
+            obj.change = True
+            obj.save()
+
+    def change_order(self, classification):
+        self.queryset = Video.objects.filter(classification=classification, level=1)
+        for i in range(5):
+            obj = self.get_random_item()
+            obj.order = 100
+            obj.change = True
+            obj.save()
+        self.queryset = Video.objects.filter(classification=classification, level=2)
+        for i in range(3):
+            obj = self.get_random_item()
+            obj.order = 90
+            obj.change = True
+            obj.save()
+        self.queryset = Video.objects.filter(classification=classification, level=3)
+        for i in range(2):
+            obj = self.get_random_item()
+            obj.order = 80
+            obj.change = True
+            obj.save()
+
+    def get_random_item(self):
+        index = random.randint(0, self.queryset.count() - 1)
+        return self.queryset[index]
