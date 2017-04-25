@@ -432,10 +432,11 @@ class OutPutView(StatusWrapMixin, JsonResponseMixin, DetailView):
             self.message = 'data required'
             self.status_code = ERROR_DATA
             return self.render_to_response({})
-        lines = data.read().split(str('\n'))
+        lines = data.read().decode('utf-8').split('\n')
         for line in lines[1:]:
             line = line.split(',')
             vid, level = line[0], line[-1]
+            print vid, level
             try:
                 video = Video.objects.get(id=vid)
                 video.level = level
@@ -469,19 +470,19 @@ class ChangeVideoOrderView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixi
 
     def change_order(self, classification):
         self.queryset = Video.objects.filter(classification=classification, level=1)
-        for i in range(5):
+        for i in range(7):
             obj = self.get_random_item()
             obj.order = 100
             obj.change = True
             obj.save()
         self.queryset = Video.objects.filter(classification=classification, level=2)
-        for i in range(3):
+        for i in range(2):
             obj = self.get_random_item()
             obj.order = 90
             obj.change = True
             obj.save()
         self.queryset = Video.objects.filter(classification=classification, level=3)
-        for i in range(2):
+        for i in range(1):
             obj = self.get_random_item()
             obj.order = 80
             obj.change = True

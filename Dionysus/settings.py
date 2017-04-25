@@ -39,21 +39,21 @@ INSTALLED_APPS = (
     'core',
     'api',
     'myadmin',
-    'corsheaders',
-    'xframeoptions',
+    # 'corsheaders',
+    # 'xframeoptions',
     'django.contrib.sitemaps',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'xframeoptions.middleware.Header',
+    # 'xframeoptions.middleware.Header',
 )
 
 ROOT_URLCONF = 'Dionysus.urls'
