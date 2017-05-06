@@ -468,6 +468,7 @@ class ChangeVideoOrderView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixi
                 obj.like = 10000
                 obj.change = True
                 obj.save()
+        return self.render_to_response({})
 
     def change_order(self, classification):
         self.queryset = Video.objects.filter(classification=classification, level=1)
