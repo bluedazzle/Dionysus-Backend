@@ -494,7 +494,7 @@ class ChangeVideoOrderView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixi
 
     def get_random_item(self):
         count = self.queryset.count() - 1
-        if count:
+        if count > 0:
             index = random.randint(0, count)
             return self.queryset[index]
         return None
