@@ -464,30 +464,37 @@ class ChangeVideoOrderView(CheckSecurityMixin, StatusWrapMixin, JsonResponseMixi
         self.queryset = Video.objects.filter(level=1)
         for i in range(10):
             obj = self.get_random_item()
-            obj.like = 10000
-            obj.change = True
-            obj.save()
+            if obj:
+                obj.like = 10000
+                obj.change = True
+                obj.save()
 
     def change_order(self, classification):
         self.queryset = Video.objects.filter(classification=classification, level=1)
         for i in range(7):
             obj = self.get_random_item()
-            obj.order = 100
-            obj.change = True
-            obj.save()
+            if obj:
+                obj.order = 100
+                obj.change = True
+                obj.save()
         self.queryset = Video.objects.filter(classification=classification, level=2)
         for i in range(2):
             obj = self.get_random_item()
-            obj.order = 90
-            obj.change = True
-            obj.save()
+            if obj:
+                obj.order = 90
+                obj.change = True
+                obj.save()
         self.queryset = Video.objects.filter(classification=classification, level=3)
         for i in range(1):
             obj = self.get_random_item()
-            obj.order = 80
-            obj.change = True
-            obj.save()
+            if obj:
+                obj.order = 80
+                obj.change = True
+                obj.save()
 
     def get_random_item(self):
-        index = random.randint(0, self.queryset.count() - 1)
-        return self.queryset[index]
+        count = self.queryset.count() - 1
+        if count:
+            index = random.randint(0, count)
+            return self.queryset[index]
+        return None
