@@ -45,7 +45,8 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
             queryset = queryset.filter(is_gif=True).order_by('-create_time')
             return queryset
         else:
-            queryset = queryset.filter(is_gif=False)
+            if not dev:
+                queryset = queryset.filter(is_gif=False)
         popular = self.request.GET.get('like', None)
         if popular:
             queryset = queryset.order_by("-like", "-create_time")
