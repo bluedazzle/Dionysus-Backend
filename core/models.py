@@ -42,6 +42,7 @@ class Video(BaseModel):
     change = models.BooleanField(default=False)
     tag = models.CharField(max_length=10, default='', null=True, blank=True)
     has_subtitle = models.BooleanField(default=False)
+    is_gif = models.BooleanField(default=False)
 
     weibo_title = models.TextField(default=default_title)
     wechat_title = models.TextField(default='', null=True, blank=True)

@@ -34,12 +34,18 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         all = self.request.GET.get('all', None)
         search = self.request.GET.get('search', None)
         dev = self.request.GET.get('dev', None)
+        is_gif = self.request.GET.get('gif', None)
         if not dev:
             queryset = queryset.filter(hidden=False).order_by("-create_time")
         if search and search != '':
             queryset = queryset.filter(Q(title__icontains=search) |
                                        Q(reference__icontains=search) |
                                        Q(author__icontains=search))
+        if is_gif:
+            queryset = queryset.filter(is_gif=True).order_by('-create_time')
+            return queryset
+        else:
+            queryset = queryset.filter(is_gif=False)
         popular = self.request.GET.get('like', None)
         if popular:
             queryset = queryset.order_by("-like", "-create_time")
@@ -51,9 +57,9 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
         return queryset
 
     def post(self, request, *args, **kwargs):
-        cls_choices = {'电影': 1, 'mv': 2, '搞笑': 3, '综艺': 4, '春节': 5}
+        cls_choices = {'电影': 1, 'mv': 2, '搞笑': 3, '综艺': 4, '春节': 5, 'gif': -1}
         json_data = json.loads(request.body)
-        cls = json_data.get('classification')
+        cls = json_data.get('classification').lower()
         total_frames = int(json_data.get('frames', 0))
         duration = float(json_data.get('duration', 0.0))
         fps = int(json_data.get('fps', 25))
@@ -68,16 +74,19 @@ class VideoListView(CheckSecurityMixin, StatusWrapMixin, MultipleJsonResponseMix
             vs = Video.objects.filter(url=url)
             if not vs.exists():
                 thumb_nail = '{0}?vframe/jpg/offset/0/w/200/h/200/'.format(url)
-                Video(title=title,
-                      url=url,
-                      author=author,
-                      reference=reference,
-                      thumb_nail=thumb_nail,
-                      total_frames=total_frames,
-                      duration=duration,
-                      hidden=True,
-                      fps=fps,
-                      classification=cls).save()
+                video = Video(title=title,
+                              url=url,
+                              author=author,
+                              reference=reference,
+                              thumb_nail=thumb_nail,
+                              total_frames=total_frames,
+                              duration=duration,
+                              hidden=True,
+                              fps=fps,
+                              classification=cls)
+                if cls == -1:
+                    video.is_gif = True
+                video.save()
             else:
                 vs = vs[0]
                 vs.title = title
